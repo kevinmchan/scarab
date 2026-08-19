@@ -1,0 +1,1427 @@
+<title>Scarab</title>
+<style>
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:400 700;font-display:swap;src:url(data:font/woff2;base64,/*@CINZEL@*/) format('woff2')}
+:root{
+  --bg0:#0B0906; --bg1:#141009; --bg2:#1D1710; --bg3:#2A2116;
+  --line:rgba(214,178,110,.15); --line2:rgba(214,178,110,.32);
+  --tx:#E8DCC0; --dim:#9C8B6E;
+  --amber:#E8B54B; --amber-dim:#A8802F; --amber-glow:rgba(232,181,75,.13);
+  --teal:#5FAE93; --red:#C8503C; --violet:#6E8FD0; --blue:#7FA8DC; --rose:#C77E6B; --sage:#9AAE72; --gold:#D4AF4F;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --disp:'Cinzel',Georgia,'Times New Roman',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg0);color:var(--tx);font-family:var(--mono);font-size:13.5px;line-height:1.5;overflow:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.5;background:repeating-linear-gradient(94deg,rgba(232,220,192,.014) 0 2px,transparent 2px 7px)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:91;background:radial-gradient(115% 85% at 50% 34%,transparent 48%,rgba(6,4,2,.62))}
+#wrap{height:100dvh;display:flex;flex-direction:column}
+button{font-family:var(--disp);cursor:pointer}
+input{font-family:var(--mono)}
+::selection{background:rgba(255,180,84,.25)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--bg3);border:2px solid var(--bg0);border-radius:5px}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ---------- header ---------- */
+#hdr{display:flex;align-items:center;gap:14px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--bg1);flex:none}
+.brand{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:.2em;color:var(--amber);white-space:nowrap;text-shadow:0 0 18px var(--amber-glow)}
+.brand .sub{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.16em;color:var(--dim);margin-left:12px}
+#statusStrip{display:flex;align-items:center;gap:10px;margin-left:auto;font-family:var(--disp)}
+#howBtn{margin-left:6px}
+#statusStrip[hidden]+#howBtn{margin-left:auto}
+#phasePill{font-size:11px;font-weight:700;letter-spacing:.16em;padding:3px 10px;border:1px solid var(--line2);color:var(--amber)}
+#phasePill.night{color:var(--violet)} #phasePill.vote{color:var(--red)} #phasePill.day{color:var(--teal)}
+#cycleLbl{font-size:11px;letter-spacing:.16em;color:var(--dim)}
+#clock{font-size:15px;font-weight:700;letter-spacing:.1em;min-width:52px;text-align:right;font-variant-numeric:tabular-nums}
+#clock.low{color:var(--red)}
+
+/* ---------- buttons / bits ---------- */
+.btn{background:var(--bg2);border:1px solid var(--line2);color:var(--tx);font-size:11px;font-weight:700;letter-spacing:.16em;padding:7px 14px;transition:border-color .15s,background .15s,color .15s}
+.btn:hover{border-color:var(--amber-dim);color:var(--amber)}
+.btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.btn.amber{background:var(--amber);border-color:var(--amber);color:#14100A}
+.btn.amber:hover{background:#F5C766}
+.btn.ghost{background:transparent}
+.btn.danger:hover{border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.lbl{font-family:var(--disp);font-size:10px;font-weight:700;letter-spacing:.24em;color:var(--amber-dim);text-transform:uppercase}
+#banner{flex:none;padding:7px 16px;font-size:12px;border-bottom:1px solid var(--line);background:var(--bg2);color:var(--amber)}
+#banner b{color:var(--tx)}
+#toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--line2);padding:8px 16px;font-size:12px;z-index:120;color:var(--amber);pointer-events:none}
+
+/* ---------- lobby ---------- */
+#lobby{flex:1;overflow-y:auto;padding:34px 20px 60px;display:flex;flex-direction:column;align-items:center;gap:26px}
+.lob-hero{text-align:center;max-width:640px}
+.lob-hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(38px,8vw,62px);letter-spacing:.3em;color:var(--amber);text-shadow:0 0 40px var(--amber-glow);text-wrap:balance}
+.lob-hero .tag{margin-top:10px;color:var(--dim);font-size:11.5px;letter-spacing:.16em}
+.glyph{display:block;margin:0 auto 14px;width:52px;height:52px;opacity:.9}
+.lob-hero p{margin-top:16px;color:var(--dim);font-size:13px;max-width:56ch;margin-inline:auto}
+.namerow{display:flex;gap:8px;justify-content:center;margin-top:18px}
+.namerow input{background:var(--bg1);border:1px solid var(--line2);color:var(--tx);padding:8px 12px;font-size:14px;width:220px;letter-spacing:.04em}
+.namerow input:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
+#invite{width:100%;max-width:620px;text-align:center}
+#invite .lbl{display:block;margin-bottom:8px}
+.invrow{display:flex;gap:8px;align-items:stretch;justify-content:center;flex-wrap:wrap}
+.invrow code{flex:1;min-width:0;background:var(--bg0);border:1px solid var(--line2);padding:9px 12px;font-size:12.5px;color:var(--amber);overflow-wrap:anywhere;text-align:left}
+#invite .hint{margin-top:8px}
+#seatGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,168px));gap:10px;justify-content:center;width:100%;max-width:900px}
+.seat{border:1px solid var(--line);background:var(--bg1);padding:12px;display:flex;flex-direction:column;gap:8px;min-height:96px}
+.seat .sid{font-family:var(--disp);font-size:10px;letter-spacing:.2em;color:var(--dim)}
+.seat .snm{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.06em;min-height:20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seat.mine{border-color:var(--amber-dim);background:linear-gradient(180deg,var(--amber-glow),transparent 60%),var(--bg1)}
+.seat.open .snm{color:var(--dim);font-weight:500}
+.lob-controls{display:flex;flex-direction:column;align-items:center;gap:14px}
+.cfgrow{display:flex;gap:8px;align-items:center}
+.cfgrow .btn.sel{border-color:var(--amber);color:var(--amber);background:var(--amber-glow)}
+#startBtn{font-size:13px;padding:12px 34px}
+.hint{color:var(--dim);font-size:11.5px;max-width:60ch;text-align:center}
+
+/* ---------- game layout ---------- */
+#game{flex:1;display:grid;grid-template-columns:216px 1fr 264px;min-height:0}
+aside{border-right:1px solid var(--line);background:var(--bg1);overflow-y:auto;min-height:0}
+#side{border-right:none;border-left:1px solid var(--line)}
+#roster{padding:10px}
+#roster .lbl{display:block;padding:4px 4px 8px}
+.ply{display:flex;align-items:center;gap:8px;padding:7px 8px;border:1px solid transparent;margin-bottom:2px;position:relative;width:100%;background:none;color:inherit;font:inherit;text-align:left}
+.ply:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.ply .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
+.ply.dead .dot{background:var(--bg3)}
+.ply .pnm{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.05em;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ply.dead .pnm{text-decoration:line-through;color:var(--dim)}
+.ply .you{font-size:9px;color:var(--amber);letter-spacing:.15em;font-family:var(--disp)}
+.ply .tal{font-family:var(--disp);font-size:11px;font-weight:700;color:var(--red);min-width:16px;text-align:right;font-variant-numeric:tabular-nums}
+.ply .rl{font-size:9.5px;letter-spacing:.1em;font-family:var(--disp)}
+.ply.votable{cursor:pointer}
+.ply.votable:hover{border-color:var(--line2);background:var(--bg2)}
+.ply.myvote{border-color:var(--red);background:rgba(255,97,87,.08)}
+.talbar{position:absolute;left:0;bottom:0;height:2px;background:var(--red);transition:width .3s}
+
+/* ---------- feed ---------- */
+#feedWrap{display:flex;flex-direction:column;min-height:0;min-width:0;background:var(--bg0)}
+#feed{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:7px;overscroll-behavior:contain}
+.fdiv{display:flex;align-items:center;gap:12px;margin:10px 0 4px;color:var(--amber-dim);font-family:var(--disp);font-size:10.5px;font-weight:700;letter-spacing:.2em;white-space:nowrap}
+.fdiv::before,.fdiv::after{content:"";height:1px;background:var(--line);flex:1}
+.fdiv.night{color:var(--violet)} .fdiv.vote{color:var(--red)}
+.fsys{color:var(--amber);font-size:12.5px}
+.fsys::before{content:"◆ ";color:var(--amber-dim)}
+.fsys.grim{color:var(--red)}
+.fsys.grim::before{color:var(--red)}
+.fchat{display:flex;gap:8px;min-width:0}
+.fchat b{font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.05em;flex:none}
+.fchat span{color:var(--tx);overflow-wrap:anywhere}
+.fchat.deadmsg b,.fchat.deadmsg span{color:var(--dim)}
+.fvote{color:var(--dim);font-size:12px}
+.fvote b{color:var(--red);font-family:var(--disp);letter-spacing:.05em}
+#chatForm{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line);background:var(--bg1);flex:none}
+#chatIn{flex:1;background:var(--bg0);border:1px solid var(--line2);color:var(--tx);padding:9px 12px;font-size:13.5px}
+#chatIn:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
+#chatIn:disabled{opacity:.4}
+
+/* ---------- side panel ---------- */
+#side{padding:12px;display:flex;flex-direction:column;gap:12px}
+.panel{border:1px solid var(--line);background:var(--bg1);padding:12px}
+.panel .lbl{display:block;margin-bottom:8px}
+.rname{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.18em}
+.rname.sab{color:var(--red)} .rname.sentinel{color:var(--violet)} .rname.medic{color:var(--teal)} .rname.crew{color:var(--tx)}
+.rflav{color:var(--dim);font-size:11.5px;margin-top:6px;font-style:italic}
+.rabil{margin-top:8px;font-size:12px;border-left:2px solid var(--line2);padding-left:8px}
+.partner{margin-top:10px;font-size:12px}.partner b{color:var(--red);font-family:var(--disp)}
+.scanhist{margin-top:8px;font-size:11.5px;color:var(--dim);display:flex;flex-direction:column;gap:3px}
+.scanhist b{color:var(--tx)} .scanhist .dirty{color:var(--red)} .scanhist .clean{color:var(--teal)}
+.tgbtns{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.tgbtns .btn{text-align:left;letter-spacing:.08em}
+.tgbtns .btn.sel{border-color:var(--amber);color:var(--amber);background:var(--amber-glow)}
+.apnote{color:var(--dim);font-size:11.5px}
+.diagbar{height:4px;background:var(--bg3);margin-top:10px;overflow:hidden;position:relative}
+.diagbar i{position:absolute;inset:0;width:38%;background:var(--amber-dim);animation:diag 2.6s linear infinite}
+@keyframes diag{0%{transform:translateX(-110%)}100%{transform:translateX(280%)}}
+@media (prefers-reduced-motion:reduce){.diagbar i{animation:none;width:100%;opacity:.35}}
+
+/* ---------- overlay ---------- */
+#overlay{position:fixed;inset:0;z-index:100;background:rgba(4,7,12,.86);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.ocard{background:var(--bg1);border:1px solid var(--line2);max-width:520px;width:100%;padding:28px;text-align:center;max-height:88dvh;overflow-y:auto}
+.ocard.wide{max-width:640px;text-align:left}
+.okicker{font-family:var(--disp);font-size:10px;font-weight:700;letter-spacing:.3em;color:var(--amber-dim);margin-bottom:12px}
+.otitle{font-family:var(--disp);font-weight:700;font-size:27px;letter-spacing:.2em;text-wrap:balance}
+.otitle.sab{color:var(--red)} .otitle.sentinel{color:var(--violet)} .otitle.medic{color:var(--teal)} .otitle.crew{color:var(--tx)} .otitle.amber{color:var(--amber)}
+.obody{margin-top:14px;color:var(--dim);font-size:13px}
+.obody .rabil{text-align:left;color:var(--tx)}
+.ocard .btn{margin-top:20px}
+.roletbl{width:100%;margin-top:16px;border-collapse:collapse;font-size:12.5px}
+.roletbl td{border-top:1px solid var(--line);padding:6px 8px;text-align:left}
+.roletbl td:last-child{text-align:right;font-family:var(--disp);letter-spacing:.1em;font-size:11px}
+.howlist{text-align:left;margin:14px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:12.5px;color:var(--tx)}
+.howroles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;text-align:left}
+.howroles div{border:1px solid var(--line);padding:8px 10px;font-size:11.5px;color:var(--dim)}
+.howroles b{display:block;font-family:var(--disp);letter-spacing:.1em;font-size:11px;margin-bottom:3px}
+@keyframes flick{0%,100%{opacity:1}92%{opacity:1}94%{opacity:.6}96%{opacity:1}}
+.ocard{animation:flick 3.4s linear infinite}
+@media (prefers-reduced-motion:reduce){.ocard{animation:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:940px){
+  #hdr{flex-wrap:wrap;row-gap:6px;gap:10px}
+  #statusStrip{gap:8px}
+  #phasePill{letter-spacing:.08em;padding:3px 7px}
+  #game{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}
+  aside{border-right:none}
+  #roster{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line);padding:8px}
+  #roster .lbl{display:none}
+  .ply{flex:none;width:auto;border:1px solid var(--line);padding:5px 9px}
+  #side{border-left:none;border-top:1px solid var(--line);flex-direction:row;overflow-x:auto;max-height:34dvh}
+  .panel{min-width:230px}
+  .brand .sub{display:none}
+}
+</style>
+
+<div id="wrap">
+  <header id="hdr">
+    <div class="brand">SCARAB<span class="sub" id="brandSub">WÂDI EL-MELIK · NOVEMBER 1926</span></div>
+    <div id="statusStrip" hidden>
+      <span id="phasePill"></span><span id="cycleLbl"></span><span id="clock"></span>
+    </div>
+    <button id="howBtn" class="btn ghost">FIELD NOTES</button>
+  </header>
+  <div id="banner" hidden></div>
+
+  <main id="lobby">
+    <section class="lob-hero">
+      <svg class="glyph" viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="var(--amber)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="32" cy="36" rx="11" ry="16"/>
+        <path d="M32 20v32M21 30c-6-3-9-9-9-15M43 30c6-3 9-9 9-15M20 40c-6 1-10 5-12 11M44 40c6 1 10 5 12 11"/>
+        <circle cx="32" cy="14" r="6"/>
+        <path d="M26 9c-4-3-7-4-11-3M38 9c4-3 7-4 11-3"/>
+      </svg>
+      <h1>SCARAB</h1>
+      <div class="tag">TOMB OF THE NAMELESS PRIEST · EXPEDITION ROSTER</div>
+      <p id="lobIntro">Seven of you broke the seal. Two are already marked — devotees of the thing you let out, and they look exactly like everyone else. Any place you leave open is taken by a member the game plays, and any of them, living or otherwise, may be lying to you.</p>
+      <div class="namerow">
+        <input id="nameIn" maxlength="18" placeholder="your name" autocomplete="off" aria-label="your name">
+      </div>
+      <div class="hint" style="margin-top:8px">sign the roster, then take a place at the dig</div>
+    </section>
+    <section id="invite" class="panel" hidden></section>
+    <section id="seatGrid" aria-label="expedition roster"></section>
+    <section class="lob-controls">
+      <div class="cfgrow" id="cfgRow">
+        <span class="lbl">pace</span>
+        <button class="btn" data-cfg="30,8,90,30">BRISK</button>
+        <button class="btn sel" data-cfg="45,12,150,45">STANDARD</button>
+        <button class="btn" data-cfg="60,15,240,60">UNHURRIED</button>
+      </div>
+      <button id="startBtn" class="btn amber" disabled>BREAK THE SEAL</button>
+      <div class="hint" id="lobHint"></div>
+    </section>
+  </main>
+
+  <main id="game" hidden>
+    <aside id="roster"></aside>
+    <section id="feedWrap">
+      <div id="feed" role="log" aria-live="polite"></div>
+      <form id="chatForm">
+        <input id="chatIn" maxlength="240" autocomplete="off" placeholder="the camp is listening" aria-label="say something to the camp">
+        <button type="submit" class="btn amber" id="chatSend">SPEAK</button>
+      </form>
+    </section>
+    <aside id="side">
+      <div class="panel" id="roleCard"></div>
+      <div class="panel" id="actionPanel"></div>
+    </aside>
+  </main>
+
+  <div id="overlay" hidden></div>
+  <div id="toast" hidden></div>
+
+  <ol id="log" artifact-sync hidden></ol>
+  <ol id="log-local" hidden></ol>
+</div>
+
+<script>
+/* ============================================================
+   SUBTERFUGE — multiplayer social deduction vs AI constructs
+   State = append-only event log (synced li elements).
+   Every view replays the log; the host's view runs the engine.
+   ============================================================ */
+'use strict';
+
+/* ---------- content (injected at build) ---------- */
+const PERSONA_LIST = __PERSONAS__;
+const COPY = __COPY__;
+const PERSONAS = Object.fromEntries(PERSONA_LIST.map(p => [p.personaId, p]));
+const PIDS = PERSONA_LIST.map(p => p.personaId);
+
+/* ---------- constants ---------- */
+const SEATS = ['s1','s2','s3','s4','s5','s6','s7'];
+const ROLE_BAG = ['sab','sab','sentinel','medic','crew','crew','crew'];
+const HUES = { s1:'#E8B54B', s2:'#5FAE93', s3:'#7FA8DC', s4:'#C77E6B', s5:'#9AAE72', s6:'#C9A227', s7:'#B08CC4' };
+const SEAT_LBL = { s1:'I', s2:'II', s3:'III', s4:'IV', s5:'V', s6:'VI', s7:'VII' };
+const ROLE_LBL = { sab:'CULTIST', sentinel:'SCRIBE', medic:'MEDJAI', crew:'DIGGER' };
+// how a role is named out loud in dialogue; internal keys stay sentinel/medic
+const ROLE_SAID = { sentinel:'Scribe', medic:'Medjai' };
+const ROLE_KEY = { sab:'saboteur', sentinel:'sentinel', medic:'medic', crew:'crew' };
+const PH_LBL = { night:'THE DARK HOURS', report:'FIRST LIGHT', day:'THE COUNCIL', vote:'THE CASTING OUT', end:'FINAL ENTRY' };
+const ACCUSE_WORDS = ['vote','cult','marked','lying','liar','lies','cast','sketch','strange','odd','dodg','avoid','explain','why','out','guilty','hiding','trust','sand'];
+
+/* ---------- utils ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function xmur3(str){let h=1779033703^str.length;for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=h<<13|h>>>19;}return function(){h=Math.imul(h^(h>>>16),2246822507);h=Math.imul(h^(h>>>13),3266489909);return (h^=h>>>16)>>>0;};}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+const rng = s => mulberry32(xmur3(String(s))());
+const rInt = (s,n) => n>0 ? Math.floor(rng(s)()*n) : 0;
+function wpick(seedStr, cands){ if(!cands.length) return null; const tot=cands.reduce((a,c)=>a+c.w,0); let x=rng(seedStr)()*tot; for(const c of cands){ x-=c.w; if(x<=0) return c; } return cands[cands.length-1]; }
+function fill(tpl, map){ return String(tpl).replace(/\{(\w+)\}/g, (m,k) => (map[k] != null ? map[k] : m)); }
+function pickLine(seedStr, arr, count){ if(!arr || !arr.length) return ''; return arr[(rInt(seedStr, arr.length) + (count||0)) % arr.length]; }
+function obf(str, key){ const data=new TextEncoder().encode(str); const r=rng('k'+key); let s=''; data.forEach(b=>{ s+=String.fromCharCode(b ^ Math.floor(r()*256)); }); return btoa(s); }
+function deobf(b64, key){ try{ const raw=atob(b64||''); const r=rng('k'+key); const out=new Uint8Array(raw.length); for(let i=0;i<raw.length;i++) out[i]=raw.charCodeAt(i)^Math.floor(r()*256); return new TextDecoder().decode(out); }catch(e){ return null; } }
+function fmtClock(ms){ const s=Math.max(0,Math.ceil(ms/1000)); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+
+/* my per-tab identity */
+function myUid(){ let u=sessionStorage.getItem('sub.uid'); if(!u){ u='u'+Math.random().toString(36).slice(2,10); sessionStorage.setItem('sub.uid',u); } return u; }
+const UID = myUid();
+const FAST = location.hash.includes('fast');
+
+/* in-flight write guard (survives view re-renders within this tab) */
+function canWrite(key){
+  let m={}; try{ m=JSON.parse(sessionStorage.getItem('sub.inflight')||'{}'); }catch(e){}
+  const now=Date.now();
+  for(const k in m) if(now-m[k]>12000) delete m[k];
+  if(m[key]) { sessionStorage.setItem('sub.inflight', JSON.stringify(m)); return false; }
+  m[key]=now; sessionStorage.setItem('sub.inflight', JSON.stringify(m)); return true;
+}
+
+/* ---------- network transport (self-hosted builds) ----------
+   The published artifact syncs through the claude.ai runtime. When the game is
+   served from its own domain that runtime is absent, so the same append-only log
+   is kept in Postgres instead: one row per event, read back in id order. The
+   publishable key is public by design — row-level security allows appending to a
+   room and reading it, and nothing else, so history cannot be rewritten. */
+const NET = {
+  url:'https://eztapprkcnwoebnfdebb.supabase.co',
+  key:'sb_publishable_x4iSO5FsdsHutEkYf764Uw_iQeGWMR7',
+  path:'/rest/v1/scarab_events',
+};
+const ROOM_ALPHABET='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I/O/0/1 — these get read aloud
+function roomFromHash(){ const m=/[#&]r=([A-Za-z0-9]{4,12})/.exec(location.hash||''); return m?m[1].toUpperCase():null; }
+function newRoomCode(){ let s=''; const a=new Uint32Array(5); (crypto.getRandomValues?crypto.getRandomValues(a):a.fill(Math.random()*1e9)); for(let i=0;i<5;i++) s+=ROOM_ALPHABET[a[i]%ROOM_ALPHABET.length]; return s; }
+const Net = {
+  room:null, lastId:0, rows:[], failures:0, busy:false,
+  hdr(){ return {apikey:NET.key, Authorization:'Bearer '+NET.key}; },
+  async pull(){
+    const q=NET.url+NET.path+'?room=eq.'+encodeURIComponent(Net.room)+'&id=gt.'+Net.lastId+'&select=id,payload&order=id.asc&limit=500';
+    const r=await fetch(q,{headers:Net.hdr()});
+    if(!r.ok) throw new Error('pull '+r.status);
+    const data=await r.json();
+    if(data.length){ data.forEach(d=>{ Net.lastId=Math.max(Net.lastId,d.id); Net.rows.push(d.payload); }); poke(); }
+    return data.length;
+  },
+  async push(items){
+    const body=items.map(([d,t])=> t!=null ? {room:Net.room, payload:{...d, text:t}} : {room:Net.room, payload:{...d}});
+    const r=await fetch(NET.url+NET.path,{method:'POST',headers:{...Net.hdr(),'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(body)});
+    if(!r.ok) throw new Error('push '+r.status);
+  },
+  async sync(items){
+    try{
+      if(items && items.length) await Net.push(items);
+      await Net.pull();
+      if(Net.failures){ Net.failures=0; hideNetBanner(); }
+    }catch(err){
+      Net.failures++;
+      if(Net.failures===3) showBanner('<b>Lost the line to camp.</b> Reconnecting — your game is safe, nothing is lost.');
+    }
+  },
+  loop(){
+    if(Net.busy) return;
+    Net.busy=true;
+    Net.sync().finally(()=>{ Net.busy=false; });
+  },
+};
+function hideNetBanner(){ const b=$('#banner'); if(b.innerHTML.includes('Lost the line')){ b.hidden=true; b.innerHTML=''; } }
+
+/* ---------- store ---------- */
+const Store = {
+  mode:'local', ns:null, bc:null,
+  el(){ return Store.mode==='sync' ? $('#log') : $('#log-local'); },
+  events(){
+    if(Store.mode==='net') return Net.rows;
+    return [...Store.el().children].map(li => { const d={...li.dataset}; d.text=li.textContent; return d; });
+  },
+  mk(d, text){ const li=document.createElement('li'); for(const k in d){ if(d[k]!=null) li.setAttribute('data-'+k, d[k]); } if(text) li.textContent=text; return li; },
+  /* human write — call synchronously inside a user-gesture handler */
+  gadd(d, text){
+    if(Store.mode==='sync' && sessionStorage.getItem('sub.ro')){ toast('you are only watching — ask for edit access'); return; }
+    d={ts:Date.now(), ...d};
+    if(Store.mode==='net'){ Net.sync([[d,text]]); return; } // echoes back on the immediate pull
+    Store.el().append(Store.mk(d,text)); Store.mirror([[d,text]]); poke();
+  },
+  /* engine write — no gesture; batched */
+  async eadd(items){
+    items=items.map(([d,t])=>[{ts:Date.now(), ...d}, t]);
+    if(Store.mode==='net'){ await Net.sync(items); return; }
+    const add=()=>items.forEach(([d,t])=>Store.el().append(Store.mk(d,t)));
+    if(Store.mode==='local'){ add(); Store.mirror(items); poke(); return; }
+    try{ await Store.ns.sync(add); }catch(err){ writeErr(err); }
+    poke();
+  },
+  /* debug multiplayer over BroadcastChannel (local mode, #bc) */
+  mirror(items){ if(Store.bc) Store.bc.postMessage({k:'ev', items:items.map(([d,t])=>[{...d},t||''])}); },
+};
+function writeErr(err){
+  const code = err && err.code;
+  if(code==='not_writer' || code==='not_granted'){ sessionStorage.setItem('sub.ro','1'); showBanner('<b>You are only watching.</b> Ask whoever started the dig to share this page with <b>edit access</b>, then reload.'); }
+  else if(code==='rate_limited'){ sessionStorage.setItem('sub.backoff', String(Date.now()+8000)); }
+  else if(code==='conflict'){ /* view reloads; nothing to do */ }
+  else toast('the line to camp stuttered — retrying');
+}
+
+/* ============================================================
+   REDUCER — replay the log into game state
+   ============================================================ */
+function freshGame(S){
+  Object.assign(S, {
+    started:false, seed:'', cfg:{night:45,report:12,day:150,vote:45},
+    host:null, players:{}, order:[], aiSeats:[], humanSeats:[],
+    phase:'lobby', round:0, until:0, phaseStart:0, feed:[], votes:{}, voteSeq:[], acts:[],
+    winner:null, deaths:{}, ejected:{}, chatN:{}, lastChatIdx:{}, powerClaims:{}, scanReveals:[],
+    phaseSeen:new Set(),
+  });
+}
+function reduce(){
+  const E = Store.events();
+  const S = { gen:0, seatsOwner:{} };
+  freshGame(S);
+  const alive = s => S.players[s] && S.players[s].alive;
+  const pushFeed = it => { it.idx=S.feed.length; S.feed.push(it); };
+
+  const resolveNight = n => {
+    const acts=S.acts.filter(a=>a.round===n);
+    const kill=[...acts].reverse().find(a=>a.a==='kill' && S.players[a.seat] && S.players[a.seat].role==='sab');
+    const shield=[...acts].reverse().find(a=>a.a==='shield' && S.players[a.seat] && S.players[a.seat].role==='medic' && alive(a.seat));
+    let death=null, shielded=false;
+    if(kill && kill.tg && alive(kill.tg)){
+      if(shield && shield.tg===kill.tg) shielded=true;
+      else { death=kill.tg; S.players[death].alive=false; }
+    }
+    S.deaths[n]={death,shielded,attempted:!!kill};
+    pushFeed({k:'dawn', n, death, shielded, attempted:!!kill});
+  };
+  const resolveVote = n => {
+    const v=S.votes[n]||{}; const tally={};
+    for(const s in v){ if(alive(s) && v[s] && S.players[v[s]]) tally[v[s]]=(tally[v[s]]||0)+1; }
+    let top=null,max=0,tie=false;
+    for(const t in tally){ if(tally[t]>max){max=tally[t];top=t;tie=false;} else if(tally[t]===max) tie=true; }
+    if(top && !tie && alive(top)){ S.players[top].alive=false; S.ejected[n]=top; pushFeed({k:'eject', n, seat:top, role:S.players[top].role}); }
+    else { S.ejected[n]=null; pushFeed({k:'tie', n}); }
+  };
+
+  for(const e of E){
+    switch(e.t){
+      case 'join': {
+        if(S.started || !SEATS.includes(e.seat)) break;
+        if(S.seatsOwner[e.seat]) break; // seat already taken — losing a race must not unseat the claimant elsewhere
+        for(const s in S.seatsOwner) if(S.seatsOwner[s].uid===e.uid) delete S.seatsOwner[s];
+        S.seatsOwner[e.seat]={uid:e.uid, nm:String(e.nm||'CREW').slice(0,18)};
+        break; }
+      case 'unjoin':
+        if(!S.started && S.seatsOwner[e.seat] && S.seatsOwner[e.seat].uid===e.uid) delete S.seatsOwner[e.seat];
+        break;
+      case 'start': {
+        if(S.started) break;
+        S.started=true; S.seed=String(e.seed||'0').replace(/[^A-Za-z0-9]/g,'').slice(0,24)||'0'; S.host=e.huid||null;
+        const c=String(e.cfg||'').split(',').map(Number);
+        if(c.length===4 && c.every(x=>x>0)) S.cfg={night:c[0],report:c[1],day:c[2],vote:c[3]};
+        const aiMap={}; String(e.ai||'').split(',').filter(Boolean).forEach(p=>{ const [s,id]=p.split('='); aiMap[s]=id; });
+        let roles={}; try{ roles=JSON.parse(deobf(e.roles,S.seed)||'{}'); }catch(err){}
+        if(!roles || typeof roles!=='object') roles={};
+        const rOf=s=>ROLE_BAG.includes(roles[s])?roles[s]:'crew';
+        SEATS.forEach(s=>{
+          const own=S.seatsOwner[s];
+          if(own) { S.players[s]={seat:s,name:own.nm,human:true,uid:own.uid,alive:true,role:rOf(s)}; S.humanSeats.push(s); }
+          else if(aiMap[s] && PERSONAS[aiMap[s]]) { S.players[s]={seat:s,name:PERSONAS[aiMap[s]].displayName,human:false,pid:aiMap[s],alive:true,role:rOf(s)}; S.aiSeats.push(s); }
+        });
+        S.order=SEATS.filter(s=>S.players[s]);
+        pushFeed({k:'sys', txt: COPY.openingLine || 'The roster is signed. Seven went down the shaft. Two came back up as something else.'});
+        break; }
+      case 'phase': {
+        if(!S.started) break;
+        const n=+e.n||0, key=e.ph+':'+n;
+        if(S.phaseSeen.has(key)) break;
+        S.phaseSeen.add(key);
+        const from=S.phase, oldRound=S.round;
+        if(from==='vote') resolveVote(oldRound);          // eject reveal lands under the vote section
+        S.phase=e.ph; S.round=n; S.until=+e.until||0;
+        const lens={night:S.cfg.night,report:S.cfg.report,day:S.cfg.day,vote:S.cfg.vote,end:0};
+        S.phaseStart=S.until-(lens[e.ph]||0)*1000;
+        pushFeed({k:'phase', ph:e.ph, n});
+        if(from==='night') resolveNight(oldRound);        // dawn report lands under its own banner
+        if(e.ph==='end') S.winner=deriveWinner(S)||e.w||'crew'; // state beats the host's forecast
+        break; }
+      case 'act': {
+        if(S.phase!=='night') break;
+        const parts=(deobf(e.x, S.seed+':'+e.ts)||'').split('|');
+        if(parts.length!==3) break;
+        const [seat,a,tg]=parts;
+        if(!alive(seat) || !S.players[tg]) break;
+        const need={kill:'sab',scan:'sentinel',shield:'medic'}[a];
+        if(!need || S.players[seat].role!==need) break;   // forged role/action pairs are inert
+        if(a==='scan' || a==='shield'){
+          const prev=S.acts.find(x=>x.round===S.round && x.seat===seat && x.a===a);
+          if(prev){ prev.tg=tg; break; }                   // revising a choice, not stacking extras
+        }
+        S.acts.push({round:S.round, seat, a, tg});
+        break; }
+      case 'chat': {
+        if(!alive(e.seat) || (S.phase!=='day' && S.phase!=='vote')) break;
+        const txt=String(e.text||'').slice(0,240); if(!txt.trim()) break;
+        const tg=e.tg && S.players[e.tg] ? e.tg : null;   // unknown targets must not poison the brains
+        if(e.int && S.feed.some(it=>it.k==='chat' && it.seat===e.seat && it.round===S.round && it.txt===txt)) break; // dual-engine dupe
+        pushFeed({k:'chat', seat:e.seat, txt, round:S.round, phase:S.phase, ts:+e.ts||0, int:e.int||null, tg, rn:e.rn||null});
+        (S.chatN[S.round] ||= {}); S.chatN[S.round][e.seat]=(S.chatN[S.round][e.seat]||0)+1;
+        S.lastChatIdx[e.seat]=S.feed.length-1;
+        if(e.int==='claim_power' && e.rn) S.powerClaims[e.seat]={role:e.rn.toLowerCase(), round:S.round};
+        if((e.int==='reveal_scan_clean'||e.int==='reveal_scan_dirty') && tg) S.scanReveals.push({by:e.seat, tg, dirty:e.int==='reveal_scan_dirty', round:S.round});
+        if(S.players[e.seat].human){
+          const low=txt.toLowerCase();
+          const m=low.match(/\b(i'?m|i am)( the)? (scribe|medjai)\b/);
+          if(m && !/\b(not|never)\b/.test(low.slice(Math.max(0,m.index-14), m.index+m[0].length)))
+            S.powerClaims[e.seat]={role: m[3]==='scribe'?'sentinel':'medic', round:S.round};
+        }
+        break; }
+      case 'vote': {
+        if(S.phase!=='vote' || !alive(e.seat) || !alive(e.tg) || e.seat===e.tg) break;
+        (S.votes[S.round] ||= {});
+        const prev=S.votes[S.round][e.seat];
+        if(prev===e.tg) break; // re-clicking your target is not a flip
+        S.votes[S.round][e.seat]=e.tg;
+        S.voteSeq.push({round:S.round, seat:e.seat, tg:e.tg, flip:!!prev});
+        pushFeed({k:'vote', seat:e.seat, tg:e.tg, flip:!!prev, round:S.round, ts:+e.ts||0});
+        break; }
+      case 'host': if(S.started && e.uid) { S.host=e.uid; pushFeed({k:'sys', txt:'Someone else is keeping the camp’s time now.'}); } break;
+      case 'rejoin': { // a player whose tab died reclaims their place mid-dig
+        if(!S.started || !S.players[e.seat] || !S.players[e.seat].human || !e.uid) break;
+        S.players[e.seat].uid=e.uid;
+        if(S.seatsOwner[e.seat]) S.seatsOwner[e.seat].uid=e.uid;
+        pushFeed({k:'sys', txt:S.players[e.seat].name+' has come back to the fire.'});
+        break; }
+      case 'reset': S.gen++; freshGame(S); break; // crew keep their seats for the rematch
+    }
+  }
+  return S;
+}
+function deriveWinner(S){
+  let sab=0, oth=0;
+  S.order.forEach(s=>{ if(!S.players[s].alive) return; if(S.players[s].role==='sab') sab++; else oth++; });
+  if(S.started && sab===0) return 'crew';
+  if(sab>0 && sab>=oth) return 'sab';
+  return null;
+}
+const mySeatOf = S => S.order.find(s=>S.players[s].uid===UID) || Object.keys(S.seatsOwner).find(s=>S.seatsOwner[s].uid===UID) || null;
+
+/* ============================================================
+   AI BRAINS — suspicion, deception, dialogue
+   ============================================================ */
+const mentions=(txt,name)=>new RegExp('(^|[^a-z0-9])'+String(name).toLowerCase().replace(/[^a-z0-9]/g,'')+'([^a-z0-9]|$)').test(String(txt).toLowerCase());
+function buildBrain(S, s){
+  const me=S.players[s], isSab=me.role==='sab';
+  const partner=isSab ? S.order.find(t=>t!==s && S.players[t].role==='sab') : null;
+  const sus={};
+  S.order.forEach(t=>{ if(t!==s && S.players[t].alive) sus[t]=0.3; });
+  const myScans={}; // sentinel knowledge
+  if(me.role==='sentinel') S.acts.forEach(a=>{ if(a.seat===s && a.a==='scan') myScans[a.tg]=(S.players[a.tg].role==='sab'); });
+
+  const bump=(t,v)=>{ if(sus[t]!=null) sus[t]+=v; };
+  // revealed information
+  for(const n in S.ejected){
+    const ej=S.ejected[n]; if(!ej) continue;
+    const wasSab=S.players[ej].role==='sab';
+    const v=S.votes[n]||{};
+    for(const voter in v){ if(v[voter]===ej) bump(voter, wasSab?-0.35:0.4); }
+  }
+  // chat-derived
+  S.feed.forEach(it=>{
+    if(it.k!=='chat' || it.seat===s) return;
+    const author=it.seat;
+    if(it.int==='defend_other' && it.tg && S.players[it.tg] && !S.players[it.tg].alive && S.players[it.tg].role==='sab') bump(author,0.5);
+    const txt=(it.txt||'').toLowerCase();
+    if(mentions(txt,me.name) && ACCUSE_WORDS.some(w=>txt.includes(w))) bump(author,0.22);
+  });
+  // vote flips
+  S.voteSeq.forEach(v=>{ if(v.flip) bump(v.seat,0.1); });
+  // quietness
+  for(let n=1;n<=S.round;n++){ const cn=S.chatN[n]||{}; S.order.forEach(t=>{ if(t!==s && S.players[t].alive && !cn[t] && (S.phase!=='day'||n<S.round)) bump(t,0.12); }); }
+  // claims
+  const claimants=Object.keys(S.powerClaims).filter(t=>S.players[t] && S.players[t].alive);
+  const byRole={}; claimants.forEach(t=>{ (byRole[S.powerClaims[t].role] ||= []).push(t); });
+  for(const r in byRole){
+    if(byRole[r].length>1) byRole[r].forEach(t=>bump(t,0.5));
+    byRole[r].forEach(t=>{ if(me.role===r && t!==s) bump(t,2.5); }); // claiming MY role: liar
+  }
+  // scan reveals from claimed sentinels
+  S.scanReveals.forEach(r=>{
+    if(r.by===s) return;
+    const trust = (me.role==='sentinel') ? 0 : (byRole['sentinel'] && byRole['sentinel'].length>1 ? 0.3 : 0.8);
+    if(sus[r.tg]!=null) sus[r.tg] += r.dirty ? 1.1*trust : -0.45*trust;
+  });
+  // hard knowledge
+  if(me.role==='sentinel') for(const t in myScans) if(sus[t]!=null) sus[t]= myScans[t] ? 9 : -9;
+  if(isSab){ S.order.forEach(t=>{ if(sus[t]==null) return; if(S.players[t].role==='sab') sus[t]=-9; }); }
+  // stable per-round noise
+  for(const t in sus) sus[t]+= (rng(S.seed+'ns'+S.round+s+t)()-0.5)*0.3;
+
+  // personal heat: accusations + votes against me this round
+  let heat=0;
+  S.feed.forEach(it=>{
+    if(it.round!==S.round) return;
+    if(it.k==='vote' && it.tg===s) heat+=1;
+    if(it.k==='chat' && it.seat!==s){ const txt=(it.txt||'').toLowerCase(); if(mentions(txt,me.name) && ACCUSE_WORDS.some(w=>txt.includes(w))) heat+=0.7; }
+  });
+  const claimedRole = S.powerClaims[s] ? S.powerClaims[s].role : null;
+  return { seat:s, me, isSab, partner, sus, heat, myScans, claimedRole };
+}
+function topSus(brain, S, excl){
+  excl = excl||[];
+  let best=null, bv=-1e9;
+  for(const t in brain.sus){ if(excl.includes(t)) continue; if(!S.players[t].alive) continue; if(brain.sus[t]>bv){ bv=brain.sus[t]; best=t; } }
+  return best;
+}
+function evidenceFor(S, brain, t){
+  const nm=S.players[t].name, out=[];
+  for(const n in S.ejected){ const ej=S.ejected[n]; if(ej && S.players[ej].role!=='sab' && (S.votes[n]||{})[t]===ej) out.push('you voted '+S.players[ej].name+' out the airlock and they were clean'); }
+  if(S.voteSeq.some(v=>v.seat===t && v.flip)) out.push('you flipped your vote at the last second');
+  const cn=S.chatN[S.round]||{};
+  if(S.round>0 && !cn[t] && (Object.keys(cn).length>1 || Date.now()-S.phaseStart>S.cfg.day*400)) out.push("you've said nothing since the dawn report");
+  S.feed.forEach(it=>{ if(it.k==='chat' && it.seat===t && it.int==='defend_other' && it.tg && S.players[it.tg] && !S.players[it.tg].alive && S.players[it.tg].role==='sab') out.push('you vouched for '+S.players[it.tg].name+' right before they got caught'); });
+  if(S.powerClaims[t] && S.powerClaims[t].round===S.round && S.round>1) out.push('your '+(ROLE_SAID[S.powerClaims[t].role]||'role')+' story only showed up when the vote turned on you');
+  if(!out.length) return null;
+  return out[rInt(S.seed+'ev'+S.round+t, out.length)];
+}
+function mkChat(S, s, int, slots, tgSeat, roleName){
+  const p=S.players[s], P=PERSONAS[p.pid];
+  const count=(S.chatN[S.round]||{})[s]||0;
+  const totalSaid=Object.values(S.chatN).reduce((a,m)=>a+(m[s]||0),0);
+  let tpl=pickLine(S.seed+p.pid+int, (P.templates[int]||[]), totalSaid);
+  // occasional tic prefix
+  if(P.style.tics && P.style.tics.length && rng(S.seed+'tic'+S.round+s+count)()<0.16 && int!=='opener') tpl=P.style.tics[rInt(S.seed+'tw'+count+s,P.style.tics.length)]+' '+tpl;
+  const text=fill(tpl, slots).slice(0,238);
+  const d={t:'chat', seat:s, int: int==='deflect' ? 'defend_self' : int}; // never stamp a saboteur marker into the shared DOM
+  if(tgSeat) d.tg=tgSeat;
+  if(roleName) d.rn=roleName;
+  return [d, text];
+}
+/* choose what an AI says, given the moment */
+function composeLine(S, brain){
+  const s=brain.seat, me=brain.me, seed=S.seed, r=S.round;
+  const names=t=>S.players[t].name;
+  const said=(S.chatN[r]||{})[s]||0;
+  const cands=[];
+  const excl = brain.isSab && brain.partner ? [brain.partner] : [];
+  const top = topSus(brain, S, excl.concat([s]));
+  const slots={ self:me.name, round:r };
+
+  // day-open reactions
+  const death=S.deaths[r] ? S.deaths[r].death : null;
+  const lastEject=S.ejected[r-1];
+  if(said===0 && S.phase==='day'){
+    if(death) cands.push({w:6, int:'react_death', tg:null, sl:{...slots, dead:names(death)}});
+    if(lastEject) cands.push({w:5, int: S.players[lastEject].role==='sab'?'react_eject_sab':'react_eject_crew', tg:null, sl:{...slots, ejected:names(lastEject)}});
+    if(r>1 && S.ejected[r-1]===null) cands.push({w:4, int:'react_tie', tg:null, sl:slots});
+    if(r===1) cands.push({w:5, int:'opener', tg:null, sl:slots});
+  }
+  // sentinel reveals (real ones)
+  if(me.role==='sentinel'){
+    const unrevealed=Object.keys(brain.myScans).filter(t=>!S.scanReveals.some(v=>v.by===s&&v.tg===t));
+    const dirty=unrevealed.find(t=>brain.myScans[t] && S.players[t].alive);
+    const clean=unrevealed.find(t=>!brain.myScans[t] && S.players[t].alive);
+    if(dirty && S.players[dirty].alive){
+      if(!brain.claimedRole) cands.push({w:12, int:'claim_power', tg:null, sl:{...slots, roleName:ROLE_SAID.sentinel}, rn:'sentinel'});
+      else cands.push({w:14, int:'reveal_scan_dirty', tg:dirty, sl:{...slots, target:names(dirty)}});
+    } else if(clean && r>=2 && brain.claimedRole) cands.push({w:3, int:'reveal_scan_clean', tg:clean, sl:{...slots, target:names(clean)}});
+  }
+  // saboteur fake sentinel play: if fake-claimed, sell a lie
+  if(brain.isSab && brain.claimedRole==='sentinel'){
+    const mark=topSus(brain,S,excl.concat([s]));
+    if(mark && !S.scanReveals.some(v=>v.by===s&&v.tg===mark)) cands.push({w:8, int:'reveal_scan_dirty', tg:mark, sl:{...slots, target:names(mark)}});
+  }
+  // pressure & accusation
+  if(top){
+    const ev=evidenceFor(S, brain, top);
+    const ag=PERSONAS[me.pid].style.aggression||0.5;
+    if(ev) cands.push({w:4.5, int:'accuse_evidence', tg:top, sl:{...slots, target:names(top), evidence:ev}});
+    cands.push({w:2.2+2*ag, int:'accuse', tg:top, sl:{...slots, target:names(top)}});
+    cands.push({w:2, int:'question_target', tg:top, sl:{...slots, target:names(top)}});
+    cands.push({w:1.8, int:'soft_read', tg:top, sl:{...slots, target:names(top)}});
+  }
+  // support someone else's recent push on my top suspect
+  const recent=S.feed.slice(-6).filter(it=>it.k==='chat' && it.seat!==s && (it.int==='accuse'||it.int==='accuse_evidence') && it.tg && it.tg===top);
+  if(recent.length) cands.push({w:3, int:'support_target', tg:top, sl:{...slots, other:names(recent[recent.length-1].seat), target:names(top)}});
+  // doubt suspicious claims
+  const claimants=Object.keys(S.powerClaims).filter(t=>t!==s && S.players[t].alive && brain.sus[t]>0.7);
+  if(claimants.length) cands.push({w:2.4, int:'doubt_claim', tg:claimants[0], sl:{...slots, claimant:names(claimants[0])}});
+  // quiet pressure
+  const cn=S.chatN[r]||{};
+  const quiet=S.order.find(t=>t!==s && S.players[t].alive && !cn[t] && !excl.includes(t));
+  if(quiet && (Date.now()-S.phaseStart)>S.cfg.day*400) cands.push({w:2, int:'pressure_quiet', tg:quiet, sl:{...slots, target:names(quiet)}});
+  // vote announce during vote phase
+  if(S.phase==='vote' && top) cands.push({w:4, int:'vote_announce', tg:top, sl:{...slots, target:names(top)}});
+  // banter
+  cands.push({w:0.7, int:'banter', tg:null, sl:slots});
+
+  const c=wpick(seed+'pick'+r+s+said, cands);
+  if(!c) return null;
+  return mkChat(S, s, c.int, c.sl, c.tg, c.rn||null);
+}
+/* respond when accused / voted against */
+function reactiveLine(S, brain){
+  const s=brain.seat, me=brain.me;
+  // damping: at most 2 defensive outbursts per round, and never counter another defense (kills A<->B loops)
+  const defended=S.feed.filter(it=>it.k==='chat' && it.seat===s && it.round===S.round && (it.int==='defend_self'||it.int==='claim_power')).length;
+  if(defended>=2) return null;
+  const myLast=S.lastChatIdx[s] ?? -1;
+  for(let i=S.feed.length-1; i>=0 && i>S.feed.length-9; i--){
+    const it=S.feed[i];
+    if(it.idx<=myLast) break;
+    if(it.round!==S.round) break;
+    if(it.k==='chat' && it.int==='defend_self') continue;
+    if(it.k==='vote' && it.tg===s && it.seat!==s){
+      const nm=S.players[it.seat].name;
+      const int = brain.isSab && rng(S.seed+'dfl'+i)()<0.55 ? 'deflect' : 'defend_self';
+      const tg = int==='deflect' ? topSus(brain,S,[s, brain.partner].filter(Boolean)) : null;
+      return { idx:it.idx, ts:it.ts||0, line: mkChat(S,s,int,{self:me.name, other:nm, round:S.round, target: tg?S.players[tg].name:nm}, tg) };
+    }
+    if(it.k==='chat' && it.seat!==s){
+      const txt=(it.txt||'').toLowerCase();
+      const mentioned = mentions(txt,me.name) || (it.tg===s && (it.int==='accuse'||it.int==='accuse_evidence'||it.int==='question_target'||it.int==='pressure_quiet'||it.int==='doubt_claim'));
+      if(!mentioned) continue;
+      const hostile = it.tg===s || ACCUSE_WORDS.some(w=>txt.includes(w));
+      if(!hostile) continue;
+      const nm=S.players[it.seat].name;
+      // cornered saboteur may fake-claim under real pressure
+      if(brain.isSab && brain.heat>=2 && !brain.claimedRole && S.phase==='vote' && rng(S.seed+'fake'+S.round+s)()<0.4){
+        const rn = Object.values(S.powerClaims).some(c=>c.role==='medic') ? 'sentinel' : 'medic';
+        return { idx:it.idx, ts:it.ts||0, line: mkChat(S,s,'claim_power',{self:me.name, roleName:ROLE_SAID[rn], round:S.round}, null, rn) };
+      }
+      const int = brain.isSab && rng(S.seed+'dfl'+i)()<0.5 ? 'deflect' : 'defend_self';
+      const tg = int==='deflect' ? topSus(brain,S,[s, brain.partner].filter(Boolean)) : null;
+      return { idx:it.idx, ts:it.ts||0, line: mkChat(S,s,int,{self:me.name, other:nm, round:S.round, target: tg?S.players[tg].name:nm}, tg) };
+    }
+  }
+  return null;
+}
+/* night decisions */
+function aiNightAct(S, brain){
+  const s=brain.seat, seed=S.seed, r=S.round;
+  const livingOther=t=>S.players[t].alive && t!==s;
+  if(brain.me.role==='sab'){
+    const already=S.acts.some(a=>a.round===r && a.a==='kill');
+    if(already) return null;
+    const scores={};
+    S.order.filter(livingOther).forEach(t=>{
+      if(S.players[t].role==='sab') return;
+      let v=1;
+      const cl=S.powerClaims[t];
+      if(cl && cl.role==='sentinel') v+=3.2;
+      if(cl && cl.role==='medic') v+=2.2;
+      // loud accurate accusers
+      S.feed.forEach(it=>{ if(it.k==='chat' && it.seat===t && it.tg && S.players[it.tg].role==='sab') v+=0.8; });
+      const talk=Object.values(S.chatN).reduce((a,m)=>a+(m[t]||0),0); v+=Math.min(talk*0.12,1);
+      v+=rng(seed+'k'+r+t)()*0.6;
+      scores[t]=v;
+    });
+    let list=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+    if(!list.length) return null;
+    let pick=list[0][0];
+    // predictable-shield dodge: revealed sentinel likely protected
+    const cl=S.powerClaims[pick];
+    if(cl && cl.role==='sentinel' && S.order.some(t=>S.players[t].alive && S.players[t].role==='medic') && list.length>1 && rng(seed+'dodge'+r)()<0.5) pick=list[1][0];
+    return {a:'kill', tg:pick};
+  }
+  if(brain.me.role==='sentinel'){
+    const scanned=Object.keys(brain.myScans);
+    const t=topSus(brain,S,[s].concat(scanned)) || S.order.filter(livingOther).find(t=>!scanned.includes(t));
+    return t ? {a:'scan', tg:t} : null;
+  }
+  if(brain.me.role==='medic'){
+    const lastShield=[...S.acts].reverse().find(a=>a.seat===s && a.a==='shield');
+    const banned=lastShield && lastShield.round===r-1 ? lastShield.tg : null;
+    const sentinelClaim=Object.keys(S.powerClaims).find(t=>S.powerClaims[t].role==='sentinel' && S.players[t].alive && t!==banned);
+    let t=null;
+    if(sentinelClaim && rng(S.seed+'md'+r)()<0.75) t=sentinelClaim;
+    else { const opts=S.order.filter(x=>S.players[x].alive && x!==banned); t=opts[rInt(S.seed+'md2'+r, opts.length)]; }
+    return t ? {a:'shield', tg:t} : null;
+  }
+  return null;
+}
+function aiVote(S, brain){
+  const s=brain.seat, r=S.round;
+  const excl=[s].concat(brain.partner && S.players[brain.partner].alive ? [brain.partner] : []);
+  if(brain.isSab){
+    // ride momentum on a non-partner; bus partner only when doomed
+    const tally={}; const v=S.votes[r]||{};
+    for(const voter in v) tally[v[voter]]=(tally[v[voter]]||0)+1;
+    const living=S.order.filter(t=>S.players[t].alive);
+    const need=Math.ceil(living.length/2);
+    if(brain.partner && S.players[brain.partner].alive && (tally[brain.partner]||0)>=need-1 && rng(S.seed+'bus'+r)()<0.7) return brain.partner;
+    let best=null,bv=0;
+    for(const t in tally){ if(!excl.includes(t) && S.players[t].alive && tally[t]>bv){ bv=tally[t]; best=t; } }
+    return best || topSus(brain,S,excl);
+  }
+  return topSus(brain,S,excl);
+}
+
+/* ============================================================
+   ENGINE — runs only on the host's view
+   ============================================================ */
+const isFastCfg = S => S.cfg.night<=12; // fast pacing derives from the shared log, not this tab's URL
+function isEngine(S){
+  if(!S.started || S.winner) return false;
+  if(Store.mode==='local') return !Store.bc || S.host===UID; // #bc debug: only the starting tab drives
+  return S.host===UID;
+}
+function speakPlan(S, s){
+  const P=PERSONAS[S.players[s].pid], vb=(P.style.verbosity??0.5);
+  const k=2+(vb>0.55?1:0)+rInt(S.seed+'plan'+S.round+s,2);
+  const r=rng(S.seed+'tm'+S.round+s);
+  return Array.from({length:k},()=>0.04+r()*0.84).sort();
+}
+function engineTick(){
+  const S=reduce();
+  if(!isEngine(S)) return;
+  if(Date.now() < +(sessionStorage.getItem('sub.backoff')||0)) return;
+  const now=Date.now(), out=[], FASTG=isFastCfg(S);
+  const phaseEv=(ph,n,len)=>{ if(canWrite('ph:'+ph+':'+n+':'+S.gen)) out.push([{t:'phase', ph, n, until: now+len*1000}]); };
+
+  if(S.phase!=='end' && now>=S.until){
+    /* ---- advance phase ---- */
+    if(S.phase==='night'){
+      ensureNightActs(S,out,true);
+      phaseEv('report',S.round,S.cfg.report);
+    } else if(S.phase==='report'){
+      const w=deriveWinner(S);
+      if(w){ if(canWrite('end:'+S.gen)) out.push([{t:'phase',ph:'end',n:S.round,w,until:now}]); }
+      else phaseEv('day',S.round,S.cfg.day);
+    } else if(S.phase==='day'){
+      phaseEv('vote',S.round,S.cfg.vote);
+    } else if(S.phase==='vote'){
+      ensureVotes(S,out,true);
+      const w=projectAfterVote(S,out);
+      if(w){ if(canWrite('end:'+S.gen)) out.push([{t:'phase',ph:'end',n:S.round,w,until:now}]); }
+      else phaseEv('night',S.round+1,S.cfg.night);
+    }
+  } else {
+    /* ---- mid-phase behavior ---- */
+    if(S.phase==='night'){
+      ensureNightActs(S,out,false);
+      const humanNightRole=S.order.some(t=>S.players[t].alive && S.players[t].human && S.players[t].role!=='crew');
+      if(!humanNightRole && nightComplete(S) && now>=S.phaseStart+(FASTG?3000:9000)) phaseEv('report',S.round,S.cfg.report);
+    }
+    if(S.phase==='day' || S.phase==='vote') aiSpeak(S,now,out);
+    if(S.phase==='vote'){
+      ensureVotes(S,out,false);
+      const living=S.order.filter(t=>S.players[t].alive);
+      const v=S.votes[S.round]||{};
+      // floor the phase so the camp actually argues before the hands go up
+      if(living.every(t=>v[t]) && now>=S.phaseStart+S.cfg.vote*550){
+        const w=projectAfterVote(S,out); // include flips queued in this very batch
+        if(w){ if(canWrite('end:'+S.gen)) out.push([{t:'phase',ph:'end',n:S.round,w,until:now}]); }
+        else phaseEv('night',S.round+1,S.cfg.night);
+      }
+    }
+  }
+  if(out.length) Store.eadd(out.slice(0,10));
+}
+function nightComplete(S){
+  const r=S.round, acts=S.acts.filter(a=>a.round===r);
+  const need=[];
+  if(S.order.some(t=>S.players[t].alive && S.players[t].role==='sab')) need.push(acts.some(a=>a.a==='kill'));
+  const sen=S.order.find(t=>S.players[t].alive && S.players[t].role==='sentinel');
+  if(sen) need.push(acts.some(a=>a.a==='scan' && a.seat===sen));
+  const med=S.order.find(t=>S.players[t].alive && S.players[t].role==='medic');
+  if(med) need.push(acts.some(a=>a.a==='shield' && a.seat===med));
+  return need.every(Boolean);
+}
+function ensureNightActs(S,out,final){
+  const r=S.round, now=Date.now(), FASTG=isFastCfg(S);
+  for(const s of S.aiSeats){
+    if(!S.players[s].alive) continue;
+    const role=S.players[s].role;
+    if(role==='crew') continue;
+    const delay=(FASTG?1500:4000)+rInt(S.seed+'nd'+r+s, FASTG?2000:9000);
+    if(!final && now<S.phaseStart+delay) continue;
+    const already=S.acts.some(a=>a.round===r && a.seat===s);
+    if(already) continue;
+    if(role==='sab' && S.acts.some(a=>a.round===r && a.a==='kill')) continue; // team already targeted (maybe human partner)
+    const act=aiNightAct(S,buildBrain(S,s));
+    if(act && canWrite('act:'+s+':'+r+':'+S.gen)){
+      const ts=Date.now();
+      out.push([{t:'act', ts, x: obf(s+'|'+act.a+'|'+act.tg, S.seed+':'+ts)}]);
+    }
+  }
+}
+function ensureVotes(S,out,final){
+  const r=S.round, now=Date.now(), FASTG=isFastCfg(S);
+  for(const s of S.aiSeats){
+    if(!S.players[s].alive) continue;
+    const v=(S.votes[r]||{})[s];
+    // cast after the announcement window, so "I'm voting X" precedes the vote
+    const delay=S.cfg.vote*300+rInt(S.seed+'vd'+r+s, S.cfg.vote*300);
+    if(!v){
+      if(final || now>=S.phaseStart+delay){
+        // honor a vote announced in chat this round, if the target still lives
+        const ann=S.feed.filter(it=>it.k==='chat' && it.seat===s && it.round===r && it.int==='vote_announce' && it.tg).pop();
+        const tg=(ann && S.players[ann.tg] && S.players[ann.tg].alive) ? ann.tg : aiVote(S,buildBrain(S,s));
+        if(tg && canWrite('vote:'+s+':'+r+':'+S.gen)) out.push([{t:'vote', seat:s, tg}]);
+      }
+    } else if(!final && now>=S.until-10000){
+      // one strategic flip near the deadline (saboteurs chase momentum)
+      const brain=buildBrain(S,s);
+      if(brain.isSab){
+        const tg=aiVote(S,brain);
+        if(tg && tg!==v && canWrite('flip:'+s+':'+r+':'+S.gen)) out.push([{t:'vote', seat:s, tg}]);
+      }
+    }
+  }
+}
+function projectAfterVote(S,out){
+  const v={...(S.votes[S.round]||{})};
+  out.forEach(([d])=>{ if(d.t==='vote') v[d.seat]=d.tg; });
+  const tally={};
+  for(const s in v){ if(S.players[s] && S.players[s].alive && S.players[v[s]] && S.players[v[s]].alive) tally[v[s]]=(tally[v[s]]||0)+1; }
+  let top=null,max=0,tie=false;
+  for(const t in tally){ if(tally[t]>max){max=tally[t];top=t;tie=false;} else if(tally[t]===max) tie=true; }
+  let sab=0,oth=0;
+  S.order.forEach(t=>{ if(!S.players[t].alive) return; if(top && !tie && t===top) return; if(S.players[t].role==='sab') sab++; else oth++; });
+  if(sab===0) return 'crew';
+  if(sab>=oth) return 'sab';
+  return null;
+}
+function aiSpeak(S,now,out){
+  let budget=1; // at most one AI line per tick keeps rhythm human
+  for(const s of S.aiSeats){
+    if(budget<=0) break;
+    if(!S.players[s].alive) continue;
+    const brain=buildBrain(S,s);
+    // reactive first — pause like a person typing before answering
+    const re=reactiveLine(S,brain);
+    if(re){
+      const jitter=(isFastCfg(S)?1200:2600)+rInt(S.seed+'rj'+re.idx+s,3500);
+      const base=Math.min(re.ts||S.phaseStart, now); // a skewed writer clock must not mute the AI
+      if(now>=base+jitter){
+        if(canWrite('re:'+s+':'+re.idx+':'+S.gen)){
+          out.push([{...re.line[0]}, re.line[1]]);
+          budget--;
+        }
+        continue;
+      }
+      continue; // still "typing" — don't fall through to scheduled talk
+    }
+    // last words when the vote is closing on me
+    if(S.phase==='vote' && now>=S.until-7000){
+      const v=S.votes[S.round]||{}; const tally={};
+      for(const x in v) tally[v[x]]=(tally[v[x]]||0)+1;
+      const top=Object.entries(tally).sort((a,b)=>b[1]-a[1])[0];
+      if(top && top[0]===s && top[1]>=2 && canWrite('lw:'+s+':'+S.round+':'+S.gen)){
+        out.push(mkChat(S,s,'last_words',{self:S.players[s].name, round:S.round}));
+        budget--; continue;
+      }
+    }
+    // scheduled
+    if(S.phase==='day'){
+      const plan=speakPlan(S,s);
+      const c=(S.chatN[S.round]||{})[s]||0;
+      if(c<plan.length && now>=S.phaseStart+plan[c]*S.cfg.day*1000 && canWrite('chat:'+s+':'+S.round+':'+c+':'+S.gen)){
+        const line=composeLine(S,brain);
+        if(line){ out.push(line); budget--; }
+      }
+    } else if(S.phase==='vote'){
+      const spoke=S.feed.some(it=>it.k==='chat' && it.seat===s && it.round===S.round && it.phase==='vote');
+      const delay=S.cfg.vote*120+rInt(S.seed+'vt'+S.round+s, S.cfg.vote*280);
+      if(!spoke && now>=S.phaseStart+delay && canWrite('vchat:'+s+':'+S.round+':'+S.gen)){
+        const line=composeLine(S,brain);
+        if(line){ out.push(line); budget--; }
+      }
+    }
+  }
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+let lastSig='';
+function seenKey(S,kind,n){ return 'sub.seen.'+S.seed+'.'+kind+'.'+n; }
+function render(){
+  const S=reduce();
+  const sig=[S.gen,Store.events().length,S.phase,S.round,S.until,S.winner,Store.mode].join('|');
+  const mySeat=mySeatOf(S);
+  const my=mySeat && S.players[mySeat] ? S.players[mySeat] : null;
+
+  $('#lobby').hidden=S.started;
+  $('#game').hidden=!S.started;
+  $('#statusStrip').hidden=!S.started;
+
+  if(sig!==lastSig){
+    lastSig=sig;
+    if(!S.started) renderLobby(S,mySeat); else renderGame(S,mySeat,my);
+  } else if(S.started){
+    renderTallies(S,mySeat); // cheap live bits
+  }
+  renderClockAndPill(S);
+  maybeOverlay(S,mySeat,my);
+}
+function renderLobby(S,mySeat){
+  const nameIn=$('#nameIn');
+  if(!nameIn.value) nameIn.value=localStorage.getItem('sub.name')||'';
+  const grid=$('#seatGrid');
+  grid.innerHTML=SEATS.map(s=>{
+    const own=S.seatsOwner[s];
+    const mine=own && own.uid===UID;
+    return '<div class="seat '+(own?(mine?'mine':''):'open')+'">'
+      +'<span class="sid">MEMBER '+SEAT_LBL[s]+'</span>'
+      +'<span class="snm"'+(own?' style="color:'+HUES[s]+'"':'')+'>'+(own?esc(own.nm):'— unfilled —')+'</span>'
+      +(mine
+        ? '<button class="btn ghost danger" data-release="'+s+'">STEP DOWN</button>'
+        : (own ? '<span class="apnote">signed</span>' : '<button class="btn" data-claim="'+s+'">TAKE PLACE</button>'))
+      +'</div>';
+  }).join('');
+  $('#startBtn').disabled=!mySeat;
+  const humans=Object.keys(S.seatsOwner).length;
+  $('#lobHint').textContent = mySeat
+    ? (humans>1 ? humans+' of you have signed. The game fills the remaining '+(7-humans)+'.' : 'Anyone with this link can take a place. The game fills the remaining '+(7-humans)+'.')
+    : 'take a place to break the seal';
+  const inv=$('#invite');
+  if(Store.mode==='net' && Net.room){
+    inv.hidden=false;
+    if(!inv.dataset.room){
+      inv.dataset.room=Net.room;
+      inv.innerHTML='<span class="lbl">invite the rest of the party</span>'
+        +'<div class="invrow"><code id="invLink">'+esc(location.origin+location.pathname+'#r='+Net.room)+'</code>'
+        +'<button class="btn" id="copyLink">COPY</button></div>'
+        +'<div class="hint">Anyone who opens this link joins <b>this</b> dig. Bookmark it — it is the game.</div>';
+    }
+  } else inv.hidden=true;
+}
+function renderGame(S,mySeat,my){
+  renderRoster(S,mySeat,my);
+  renderFeed(S,mySeat,my);
+  renderSide(S,mySeat,my);
+  const inp=$('#chatIn'), send=$('#chatSend');
+  const can=my && my.alive && (S.phase==='day'||S.phase==='vote') && !S.winner;
+  inp.disabled=!can; send.disabled=!can;
+  inp.placeholder = !my ? 'watching from outside the firelight'
+    : !my.alive ? 'the dead do not speak at council'
+    : S.phase==='night' ? 'the camp sleeps — nothing is said until light'
+    : S.phase==='report' ? 'the camp is counting heads'
+    : 'the camp is listening';
+}
+function renderRoster(S,mySeat,my){
+  const r=S.round, v=S.votes[r]||{}, tally={};
+  for(const s in v) tally[v[s]]=(tally[v[s]]||0)+1;
+  const living=S.order.filter(t=>S.players[t].alive).length;
+  const omni=my && !my.alive;
+  $('#roster').innerHTML='<span class="lbl">the expedition — '+living+' living</span>'+S.order.map(s=>{
+    const p=S.players[s];
+    const votable=my && my.alive && S.phase==='vote' && p.alive && s!==mySeat && !S.winner;
+    const myv=v[mySeat]===s;
+    const tl=tally[s]||0;
+    const w=living?Math.min(100,Math.round(100*tl/living)):0;
+    const showRole=(!p.alive)||(omni)||(S.winner);
+    const inner='<span class="dot"></span>'
+      +'<span class="pnm" style="color:'+HUES[s]+'">'+esc(p.name)+'</span>'
+      +(s===mySeat?'<span class="you">YOU</span>':'')
+      +(showRole?'<span class="rl" style="color:'+(p.role==='sab'?'var(--red)':'var(--dim)')+'">'+ROLE_LBL[p.role]+'</span>':'')
+      +(S.phase==='vote'&&p.alive&&tl?'<span class="tal">'+tl+'</span>':'')
+      +(S.phase==='vote'&&p.alive?'<span class="talbar" style="width:'+w+'%"></span>':'');
+    const cls='ply '+(p.alive?'':'dead ')+(votable?'votable ':'')+(myv?'myvote':'');
+    return votable
+      ? '<button type="button" class="'+cls+'" data-pseat="'+s+'" aria-pressed="'+(myv?'true':'false')+'" aria-label="cast out '+esc(p.name)+'">'+inner+'</button>'
+      : '<div class="'+cls+'" data-pseat="'+s+'">'+inner+'</div>';
+  }).join('');
+}
+let voteSig='';
+function renderTallies(S,mySeat){
+  if(!S.started || S.phase!=='vote') return;
+  const sig=JSON.stringify([S.votes[S.round]||{}, S.order.map(s=>S.players[s].alive)]);
+  if(sig===voteSig) return; // nothing changed — don't wipe focus or eat a click mid-gesture
+  voteSig=sig;
+  const focused=document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.pseat : null;
+  renderRoster(S,mySeat,mySeat?S.players[mySeat]:null);
+  if(focused){ const nb=$('#roster [data-pseat="'+focused+'"]'); if(nb && nb.focus) nb.focus(); }
+}
+function feedHTML(S,it,mySeat){
+  const nm=s=>S.players[s]?esc(S.players[s].name):'??';
+  const hue=s=>HUES[s]||'var(--tx)';
+  switch(it.k){
+    case 'phase': {
+      const cls=it.ph==='night'?'night':(it.ph==='vote'?'vote':'');
+      return '<div class="fdiv '+cls+'">'+PH_LBL[it.ph]+(it.ph==='end'?'':' — DAY '+it.n)+'</div>';
+    }
+    case 'sys': return '<div class="fsys">'+esc(it.txt)+'</div>';
+    case 'dawn': {
+      let txt;
+      if(it.death) txt=fill(pickLine(S.seed+'dk'+it.n, COPY.dawnKill), {dead:S.players[it.death].name});
+      else if(it.shielded) txt=pickLine(S.seed+'ds'+it.n, COPY.dawnShield);
+      else if(it.attempted) txt=COPY.wardHeld||'Something moved in the night. Nobody was taken.';
+      else txt=COPY.quietNight||'A still night. Whatever walks here did not walk far.';
+      return '<div class="fsys'+(it.death?' grim':'')+'">'+esc(txt)+'</div>';
+    }
+    case 'eject': {
+      const wasSab=it.role==='sab';
+      const txt=fill(pickLine(S.seed+'ej'+it.n, wasSab?COPY.ejectSab:COPY.ejectCrew), {ejected:S.players[it.seat].name, roleName:ROLE_LBL[it.role]});
+      return '<div class="fsys'+(wasSab?'':' grim')+'">'+esc(txt)+'</div>';
+    }
+    case 'tie': return '<div class="fsys">'+esc(COPY.tieLine||'The council deadlocks. Nobody walks into the desert tonight.')+'</div>';
+    case 'vote': return '<div class="fvote">▸ <b style="color:'+hue(it.seat)+'">'+nm(it.seat)+'</b>'+(it.flip?' turns on':' names')+' <b>'+nm(it.tg)+'</b></div>';
+    case 'chat': {
+      const dead=!S.players[it.seat].alive && S.phase!=='end';
+      return '<div class="fchat'+(dead?' deadmsg':'')+'" data-seat="'+it.seat+'"><b style="color:'+hue(it.seat)+'">'+nm(it.seat)+'</b><span>'+esc(it.txt)+'</span></div>';
+    }
+  }
+  return '';
+}
+let lastFeedN=0, lastFeedGen=-1, lastAliveSig='';
+function renderFeed(S,mySeat,my){
+  const el=$('#feed');
+  if(S.gen!==lastFeedGen || S.feed.length<lastFeedN){ el.innerHTML=''; lastFeedN=0; lastFeedGen=S.gen; }
+  const aliveSig=S.order.map(s=>S.players[s].alive?1:0).join('');
+  if(S.feed.length===lastFeedN && aliveSig===lastAliveSig) return;
+  const pin=el.scrollHeight-el.scrollTop-el.clientHeight<90;
+  if(S.feed.length>lastFeedN){
+    // append only the new items — a live region must never re-announce its history
+    el.insertAdjacentHTML('beforeend', S.feed.slice(lastFeedN).map(it=>feedHTML(S,it,mySeat)).join(''));
+    lastFeedN=S.feed.length;
+    while(el.children.length>400) el.firstChild.remove();
+  }
+  if(aliveSig!==lastAliveSig){
+    lastAliveSig=aliveSig;
+    S.order.forEach(s=>{ if(!S.players[s].alive) el.querySelectorAll('.fchat[data-seat="'+s+'"]').forEach(n=>n.classList.add('deadmsg')); });
+  }
+  if(pin) el.scrollTop=el.scrollHeight;
+}
+function renderSide(S,mySeat,my){
+  const rc=$('#roleCard'), ap=$('#actionPanel');
+  if(!my){
+    rc.innerHTML='<span class="lbl">onlooker</span><div class="apnote">You have no place at this dig. Watch the council, and be glad of it.</div>';
+    const humanSeats=S.order.filter(s=>S.players[s].human);
+    ap.innerHTML = (Store.mode!=='local' && humanSeats.length && !S.winner)
+      ? '<span class="lbl">were you one of them?</span><div class="apnote">If your tent went cold, take your place back.</div><div class="tgbtns">'
+        + humanSeats.map(s=>'<button class="btn" data-rejoin="'+s+'">I AM '+esc(S.players[s].name)+'</button>').join('')+'</div>'
+      : '';
+    return;
+  }
+  const role=my.role, RC=COPY.roles[ROLE_KEY[role]]||{};
+  let extra='';
+  if(role==='sab'){
+    const partner=S.order.find(t=>t!==mySeat && S.players[t].role==='sab');
+    if(partner) extra='<div class="partner">the other marked one: <b>'+esc(S.players[partner].name)+'</b>'+(S.players[partner].alive?'':' (gone)')+'</div>';
+  }
+  if(role==='sentinel'){
+    const scans=S.acts.filter(a=>a.seat===mySeat && a.a==='scan');
+    if(scans.length) extra='<div class="scanhist">'+scans.map(a=>{
+      const done=a.round<S.round || S.phase!=='night';
+      const dirty=S.players[a.tg].role==='sab';
+      return 'night '+a.round+' — <b>'+esc(S.players[a.tg].name)+'</b>: '+(done?(dirty?'<span class="dirty">MARKED</span>':'<span class="clean">clean</span>'):'still reading…');
+    }).join('')+'</div>';
+  }
+  rc.innerHTML='<span class="lbl">what you are</span>'
+    +'<div class="rname '+role+'">'+ROLE_LBL[role]+'</div>'
+    +(my.alive?'':'<div class="apnote" style="color:var(--red);margin-top:6px">DEAD — the dead see everything</div>')
+    +'<div class="rflav">'+esc(RC.flavor||'')+'</div>'
+    +'<div class="rabil">'+esc(RC.ability||'')+'</div>'+extra;
+  ap.innerHTML=actionHTML(S,mySeat,my);
+}
+function actionHTML(S,mySeat,my){
+  if(S.winner) return '<span class="lbl">the dig is closed</span><div class="apnote">The valley keeps its ledger.</div>';
+  if(!my.alive){
+    return '<span class="lbl">what the dead know</span><div class="scanhist">'+S.order.map(s=>'<div><b style="color:'+HUES[s]+'">'+esc(S.players[s].name)+'</b> — '+ROLE_LBL[S.players[s].role]+'</div>').join('')+'</div>';
+  }
+  const r=S.round;
+  if(S.phase==='night'){
+    const acts=S.acts.filter(a=>a.round===r);
+    const mine=acts.filter(a=>a.seat===mySeat);
+    const tgBtn=(t,sel)=>'<button class="btn'+(sel?' sel':'')+'" data-act-tg="'+t+'">'+esc(S.players[t].name)+'</button>';
+    if(my.role==='sab'){
+      const team=[...acts].reverse().find(a=>a.a==='kill');
+      const opts=S.order.filter(t=>S.players[t].alive && S.players[t].role!=='sab');
+      return '<span class="lbl">who is taken tonight</span>'
+        +(team?'<div class="apnote">chosen: <b style="color:var(--red)">'+esc(S.players[team.tg].name)+'</b> — the last name before dawn is the one that stands</div>':'<div class="apnote">name the one the dark takes</div>')
+        +'<div class="tgbtns">'+opts.map(t=>tgBtn(t, team&&team.tg===t)).join('')+'</div>';
+    }
+    if(my.role==='sentinel'){
+      const mineScan=mine.find(a=>a.a==='scan');
+      const opts=S.order.filter(t=>S.players[t].alive && t!==mySeat);
+      return '<span class="lbl">read the texts on one of them</span>'
+        +(mineScan?'<div class="apnote">reading <b>'+esc(S.players[mineScan.tg].name)+'</b> — you will know by first light</div>':'<div class="apnote">the lamp burns long enough for one name</div>')
+        +'<div class="tgbtns">'+opts.map(t=>tgBtn(t, mineScan&&mineScan.tg===t)).join('')+'</div>';
+    }
+    if(my.role==='medic'){
+      const mineSh=mine.find(a=>a.a==='shield');
+      const last=[...S.acts].reverse().find(a=>a.seat===mySeat && a.a==='shield' && a.round===r-1);
+      const opts=S.order.filter(t=>S.players[t].alive && (!last || t!==last.tg));
+      return '<span class="lbl">lay the ward</span>'
+        +(mineSh?'<div class="apnote">warding <b>'+esc(S.players[mineSh.tg].name)+'</b> tonight</div>':'<div class="apnote">you may ward yourself. never the same person two nights running.</div>')
+        +'<div class="tgbtns">'+opts.map(t=>tgBtn(t, mineSh&&mineSh.tg===t)).join('')+'</div>';
+    }
+    return '<span class="lbl">the dark hours</span><div class="apnote">You lie in your tent listening to the ropes move against the shaft, and tell yourself it is the wind.</div><div class="diagbar"><i></i></div>';
+  }
+  if(S.phase==='vote'){
+    const v=(S.votes[r]||{})[mySeat];
+    return '<span class="lbl">the casting out</span><div class="apnote">'+(v?'you have named <b style="color:var(--red)">'+esc(S.players[v].name)+'</b> — choose another to change it':'name someone from the expedition list')+'</div>';
+  }
+  if(S.phase==='day'){
+    let host='';
+    if(S.host===UID || Store.mode==='local') host='<button class="btn danger" id="callVote" style="margin-top:10px">CALL THE VOTE NOW</button>';
+    return '<span class="lbl">the council</span><div class="apnote">Work the camp. Someone across this fire is lying to you.</div>'+host;
+  }
+  return '<span class="lbl">'+esc(PH_LBL[S.phase]||'')+'</span>';
+}
+function renderClockAndPill(S){
+  const pill=$('#phasePill'), cy=$('#cycleLbl'), ck=$('#clock');
+  if(!S.started){ return; }
+  pill.textContent=PH_LBL[S.phase]||'—';
+  pill.className=S.phase;
+  cy.textContent='DAY '+(S.round||0);
+  if(S.phase==='end'){ ck.textContent='--:--'; ck.className=''; return; }
+  const ms=S.until-Date.now();
+  ck.textContent=fmtClock(ms);
+  ck.className=ms<15000?'low':'';
+  // stalled-engine takeover offer — any viewer may resuscitate the game, seated or not
+  const stalled=S.started && !S.winner && Store.mode!=='local' && Date.now()>S.until+20000 && S.host!==UID;
+  const b=$('#banner');
+  if(stalled){
+    b.hidden=false;
+    b.innerHTML='<b>The camp has gone still.</b> Whoever was keeping time may have closed their tab. <button class="btn" id="takeover" style="margin-left:8px">KEEP TIME YOURSELF</button>';
+  } else if(b.innerHTML.includes('takeover') || b.innerHTML.includes('KEEP TIME')){
+    b.hidden=true; b.innerHTML='';
+  }
+}
+/* one-shot overlays */
+let overlayTimer=null;
+function maybeOverlay(S,mySeat,my){
+  const ov=$('#overlay');
+  if(ov.dataset.pin==='1') return; // manual overlay (howto) open
+  if(!S.started){ return; }
+  // role reveal
+  if(my && !sessionStorage.getItem(seenKey(S,'role',0))){
+    const RC=COPY.roles[ROLE_KEY[my.role]]||{};
+    let extra='';
+    if(my.role==='sab'){
+      const partner=S.order.find(t=>t!==mySeat && S.players[t].role==='sab');
+      if(partner) extra='<div class="partner" style="margin-top:12px">the other marked one: <b>'+esc(S.players[partner].name)+'</b></div>';
+    }
+    showOverlay('<div class="okicker">FOR '+esc(S.players[mySeat].name).toUpperCase()+' ALONE</div>'
+      +'<div class="otitle '+my.role+'">'+ROLE_LBL[my.role]+'</div>'
+      +'<div class="obody">'+esc(RC.flavor||'')+'<div class="rabil">'+esc(RC.ability||'')+'</div>'+extra+'</div>'
+      +'<button class="btn amber" data-seen="'+seenKey(S,'role',0)+'">I UNDERSTAND</button>', true);
+    return;
+  }
+  // dawn / eject / end interstitials
+  for(const it of S.feed.slice(-6)){
+    if(it.k==='dawn' && !sessionStorage.getItem(seenKey(S,'dawn',it.n))){
+      sessionStorage.setItem(seenKey(S,'dawn',it.n),'1');
+      const txt= it.death ? fill(pickLine(S.seed+'dk'+it.n, COPY.dawnKill), {dead:S.players[it.death].name})
+        : it.shielded ? pickLine(S.seed+'ds'+it.n, COPY.dawnShield)
+        : (COPY.quietNight||'Nobody was taken.');
+      flashOverlay('<div class="okicker">FIRST LIGHT — DAY '+it.n+'</div><div class="otitle '+(it.death?'sab':'amber')+'">'+(it.death?esc(S.players[it.death].name).toUpperCase()+' IS DEAD':'THE WARD HELD')+'</div><div class="obody">'+esc(txt)+'</div>');
+      return;
+    }
+    if(it.k==='eject' && !sessionStorage.getItem(seenKey(S,'eject',it.n))){
+      sessionStorage.setItem(seenKey(S,'eject',it.n),'1');
+      const wasSab=it.role==='sab';
+      flashOverlay('<div class="okicker">CAST OUT — DAY '+it.n+'</div><div class="otitle '+(wasSab?'amber':'sab')+'">'+esc(S.players[it.seat].name).toUpperCase()+' — '+ROLE_LBL[it.role]+'</div><div class="obody">'+(wasSab?'The camp was right. One of the marked is walking into the sand.':'The camp was wrong, and the desert does not give anyone back.')+'</div>');
+      return;
+    }
+  }
+  if(S.winner && !sessionStorage.getItem(seenKey(S,'end',0))){
+    const W=S.winner==='crew'?COPY.winCrew:COPY.winSab;
+    showOverlay('<div class="okicker">FINAL ENTRY</div><div class="otitle '+(S.winner==='crew'?'amber':'sab')+'">'+esc(W.title||'')+'</div><div class="obody">'+esc(W.body||'')+'</div>'
+      +'<table class="roletbl">'+S.order.map(s=>'<tr><td style="color:'+HUES[s]+'">'+esc(S.players[s].name)+'</td><td>'+(S.players[s].alive?'walked out':'lost')+'</td><td style="color:'+(S.players[s].role==='sab'?'var(--red)':'var(--dim)')+'">'+ROLE_LBL[S.players[s].role]+'</td></tr>').join('')+'</table>'
+      +'<button class="btn amber" id="newGame" data-seen="'+seenKey(S,'end',0)+'">DIG AGAIN — SAME PARTY</button>'
+      +'<button class="btn ghost" data-seen="'+seenKey(S,'end',0)+'" style="margin-left:8px">CLOSE</button>', true);
+  }
+}
+function showOverlay(html, pin){
+  const ov=$('#overlay');
+  if(ov.dataset.key===html && !ov.hidden) return; // already showing this — don't thrash the DOM
+  clearTimeout(overlayTimer);
+  ov.dataset.key=html;
+  ov.innerHTML='<div class="ocard">'+html+'</div>';
+  ov.hidden=false;
+  ov.dataset.pin=pin?'1':'0';
+}
+function flashOverlay(html){
+  showOverlay(html,false);
+  clearTimeout(overlayTimer);
+  overlayTimer=setTimeout(()=>{ const ov=$('#overlay'); if(ov.dataset.pin!=='1'){ ov.hidden=true; ov.innerHTML=''; } }, 3200);
+}
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.hidden=false;
+  clearTimeout(toast._t); toast._t=setTimeout(()=>{ t.hidden=true; }, 3000);
+}
+function showBanner(html){ const b=$('#banner'); b.innerHTML=html; b.hidden=false; }
+function showHow(){
+  const roles=COPY.roles;
+  showOverlay('<div class="okicker">FIELD NOTES</div><div class="otitle amber" style="font-size:20px">HOW THE DIG WORKS</div>'
+    +'<ol class="howlist">'+COPY.howto.map(h=>'<li>'+esc(h)+'</li>').join('')+'</ol>'
+    +'<div class="howroles">'+['saboteur','sentinel','medic','crew'].map(k=>'<div><b style="color:'+(k==='saboteur'?'var(--red)':k==='sentinel'?'var(--violet)':k==='medic'?'var(--teal)':'var(--tx)')+'">'+esc(roles[k].name)+'</b>'+esc(roles[k].ability)+'</div>').join('')+'</div>'
+    +'<button class="btn amber" id="howClose">BACK TO THE CAMP</button>', true);
+}
+
+/* ============================================================
+   INPUT — every human write happens inside these gesture handlers
+   ============================================================ */
+function bindUI(){
+  $('#nameIn').addEventListener('input', e=>localStorage.setItem('sub.name', e.target.value));
+  $('#cfgRow').addEventListener('click', e=>{
+    const b=e.target.closest('[data-cfg]'); if(!b) return;
+    [...$('#cfgRow').querySelectorAll('.btn')].forEach(x=>x.classList.remove('sel'));
+    b.classList.add('sel');
+  });
+  $('#invite').addEventListener('click', e=>{
+    if(!e.target.closest('#copyLink')) return;
+    const link=location.origin+location.pathname+'#r='+Net.room;
+    const done=()=>toast('link copied — send it to the rest of the party');
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(link).then(done, ()=>toast(link));
+    else { const r=document.createRange(); r.selectNode($('#invLink')); getSelection().removeAllRanges(); getSelection().addRange(r); done(); }
+  });
+  $('#seatGrid').addEventListener('click', e=>{
+    const claim=e.target.closest('[data-claim]'), rel=e.target.closest('[data-release]');
+    if(claim){
+      const nm=($('#nameIn').value||'').trim();
+      if(!nm){ toast('sign the roster first'); $('#nameIn').focus(); return; }
+      Store.gadd({t:'join', seat:claim.dataset.claim, uid:UID, nm});
+    }
+    if(rel) Store.gadd({t:'unjoin', seat:rel.dataset.release, uid:UID});
+  });
+  $('#startBtn').addEventListener('click', ()=>{
+    const S=reduce();
+    if(S.started || !mySeatOf(S)) return;
+    const seed=String(Date.now()%1e8)+String(Math.floor(Math.random()*1e6));
+    const cfg=FAST ? '10,5,30,15' : (($('#cfgRow .btn.sel')||{}).dataset ? $('#cfgRow .btn.sel').dataset.cfg : '45,12,150,45');
+    // AI fill + roles
+    const shuffle=(arr,tag)=>{ const a=[...arr], r=rng(seed+tag); for(let i=a.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+    const openSeats=SEATS.filter(s=>!S.seatsOwner[s]);
+    const ais=shuffle(PIDS,'ai').slice(0,openSeats.length);
+    const ai=openSeats.map((s,i)=>s+'='+ais[i]).join(',');
+    const bag=shuffle(ROLE_BAG,'roles');
+    const roles={}; SEATS.forEach((s,i)=>roles[s]=bag[i]);
+    const nightUntil=Date.now()+(cfg.split(',')[0]|0)*1000;
+    // clear per-game seen markers from any previous run
+    Object.keys(sessionStorage).filter(k=>k.startsWith('sub.seen.')).forEach(k=>sessionStorage.removeItem(k));
+    Store.gadd({t:'start', seed, huid:UID, cfg, ai, roles: obf(JSON.stringify(roles), seed)});
+    Store.gadd({t:'phase', ph:'night', n:1, until: nightUntil});
+  });
+  $('#chatForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const S=reduce(), mySeat=mySeatOf(S);
+    const txt=$('#chatIn').value.trim();
+    if(!txt || !mySeat || !S.players[mySeat] || !S.players[mySeat].alive) return;
+    if(S.phase!=='day' && S.phase!=='vote') return;
+    Store.gadd({t:'chat', seat:mySeat}, txt.slice(0,240));
+    $('#chatIn').value='';
+  });
+  $('#roster').addEventListener('click', e=>{
+    const el=e.target.closest('[data-pseat]'); if(!el) return;
+    const S=reduce(), mySeat=mySeatOf(S), tg=el.dataset.pseat;
+    if(!mySeat || S.phase!=='vote' || !S.players[mySeat].alive || !S.players[tg].alive || tg===mySeat || S.winner) return;
+    Store.gadd({t:'vote', seat:mySeat, tg});
+  });
+  $('#side').addEventListener('click', e=>{
+    const tg=e.target.closest('[data-act-tg]');
+    if(tg){
+      const S=reduce(), mySeat=mySeatOf(S);
+      if(!mySeat || S.phase!=='night' || !S.players[mySeat].alive) return;
+      const role=S.players[mySeat].role;
+      const a=role==='sab'?'kill':role==='sentinel'?'scan':role==='medic'?'shield':null;
+      if(!a) return;
+      const ts=Date.now(); // whole payload obfuscated: a plaintext data-a would out the actor's role
+      Store.gadd({t:'act', ts, x: obf(mySeat+'|'+a+'|'+tg.dataset.actTg, S.seed+':'+ts)});
+      return;
+    }
+    const rj=e.target.closest('[data-rejoin]');
+    if(rj){ Store.gadd({t:'rejoin', seat:rj.dataset.rejoin, uid:UID}); return; }
+    if(e.target.closest('#callVote')){
+      const S=reduce();
+      if(S.phase==='day' && (S.host===UID || Store.mode==='local')) Store.gadd({t:'phase', ph:'vote', n:S.round, until: Date.now()+S.cfg.vote*1000});
+    }
+  });
+  $('#banner').addEventListener('click', e=>{
+    if(e.target.closest('#takeover')) Store.gadd({t:'host', uid:UID});
+  });
+  $('#howBtn').addEventListener('click', showHow);
+  $('#overlay').addEventListener('click', e=>{
+    const seen=e.target.closest('[data-seen]');
+    if(seen){ sessionStorage.setItem(seen.dataset.seen,'1'); }
+    if(e.target.closest('#newGame')){
+      Store.gadd({t:'reset'});
+      Object.keys(sessionStorage).filter(k=>k.startsWith('sub.seen.')).forEach(k=>sessionStorage.removeItem(k));
+    }
+    if(seen || e.target.closest('#howClose') || e.target===$('#overlay')){
+      if(e.target===$('#overlay') && $('#overlay').dataset.pin==='1' && !seen) return; // pinned overlays need their button
+      $('#overlay').hidden=true; $('#overlay').innerHTML=''; $('#overlay').dataset.pin='0';
+    }
+  });
+}
+
+/* ---------- change plumbing ---------- */
+let pokeQueued=false;
+function poke(){
+  if(pokeQueued) return; pokeQueued=true;
+  setTimeout(()=>{ pokeQueued=false; render(); }, 40);
+}
+
+/* ---------- boot ---------- */
+(async function boot(){
+  const run = window.__subRun = (window.__subRun||0)+1; // a re-run mid-await must not double-bind
+  if(window.__subLoops){ window.__subLoops.forEach(clearInterval); }
+  sessionStorage.removeItem('sub.ro'); // re-probe access each boot; sync-off will re-flag if still read-only
+  let ns=null;
+  try{ if(typeof claude!=='undefined' && claude.use) ns=await claude.use('artifact'); }catch(e){ ns=null; }
+  if(window.__subRun!==run) return; // superseded while awaiting the capability
+  Store.ns=ns;
+  // artifact runtime if we're inside it, otherwise the game's own backend, otherwise solo
+  Store.mode = ns ? 'sync' : (NET.url && location.protocol!=='file:' ? 'net' : 'local');
+  if(Store.mode==='net'){
+    let room=roomFromHash();
+    if(!room){
+      room=newRoomCode();
+      const rest=(location.hash||'').replace(/^#/,'').split('&').filter(x=>x && !/^r=/.test(x));
+      history.replaceState(null,'','#'+['r='+room].concat(rest).join('&'));
+    }
+    Net.room=room;
+    try{ await Net.pull(); }catch(e){ showBanner('<b>Lost the line to camp.</b> Reconnecting — your game is safe, nothing is lost.'); }
+    if(window.__subRun!==run) return;
+    window.addEventListener('hashchange', ()=>{ if(roomFromHash()!==Net.room) location.reload(); });
+  }
+  if(Store.mode==='local'){
+    showBanner('<b>Dry run.</b> Nobody else can reach this copy — you are digging alone against the party.');
+    if(location.hash.includes('bc')){
+      Store.bc=new BroadcastChannel('subterfuge');
+      Store.bc.onmessage=ev=>{
+        if(ev.data.k==='ev'){ ev.data.items.forEach(([d,t])=>Store.el().append(Store.mk(d,t))); poke(); }
+        if(ev.data.k==='hi'){ Store.bc.postMessage({k:'full', html:Store.el().innerHTML}); }
+        if(ev.data.k==='full' && Store.el().children.length<ev.data.html.split('</li>').length-1){ Store.el().innerHTML=ev.data.html; poke(); }
+      };
+      Store.bc.postMessage({k:'hi'});
+    }
+  }
+  if(!window.__subDocBound){
+    window.__subDocBound=true;
+    document.addEventListener('claude:edit', ()=>poke());
+    document.addEventListener('claude:sync-off', ()=>{ sessionStorage.setItem('sub.ro','1'); showBanner('<b>You are only watching.</b> Ask whoever started the dig to share this page with <b>edit access</b>, then reload.'); });
+    document.addEventListener('claude:sync-lost', ()=>toast('the line to camp is unsteady — this will resend'));
+  }
+  if(Store.mode==='net') $('#brandSub').textContent='WÂDI EL-MELIK · DIG '+Net.room;
+  bindUI();
+  const t1=setInterval(engineTick, 1000);
+  const t2=setInterval(render, 500);
+  window.__subLoops=[t1,t2];
+  if(Store.mode==='net'){
+    const t3=setInterval(()=>{ if(!document.hidden) Net.loop(); }, 1300);
+    const t4=setInterval(()=>{ if(document.hidden) Net.loop(); }, 6000); // background tabs keep up, cheaply
+    window.__subLoops.push(t3,t4);
+    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) Net.loop(); });
+  }
+  render();
+})();
+</script>

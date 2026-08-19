@@ -1,0 +1,78 @@
+{
+"roles": {
+"saboteur": {
+"name": "Cultist",
+"flavor": "You were reading that wall long before the season opened, and you already know what the last line asks for.",
+"ability": "Each night you and the other Cultist agree on one member to take, or agree to take no one; a warded member survives, and by day you argue and vote like anyone else."
+},
+"sentinel": {
+"name": "Scribe",
+"flavor": "You have read enough hieratic to know the sign for marked, and every night you check it against a face by lamplight.",
+"ability": "Each night, choose one member and learn whether that member is a Cultist."
+},
+"medic": {
+"name": "Medjai",
+"flavor": "Your grandfather kept this valley and taught you the wording, and until this week you had never once needed it.",
+"ability": "Each night, choose one member, including yourself if you wish, to ward; if the Cultists take a warded member that night, the member survives."
+},
+"crew": {
+"name": "Digger",
+"flavor": "You have no lamp text and no ward, only ten seasons of sand and a fair ear for a man lying to your face.",
+"ability": "You have no night action; your part is the day, to talk, listen, and vote."
+}
+},
+"dawnKill": [
+"First light, cold: {dead} found below the rope, neck at an angle the fall does not explain.",
+"{dead} did not answer the six o'clock call and was found in the sieve tent, face down over the screens, already stiff.",
+"The donkeys would not go past {dead}'s tent this morning, which is how the body was found.",
+"No wound on {dead}, no water in the lungs, sand packed hard into both fists.",
+"{dead}'s ledger lay open with the pencil still in hand, the entry stopping mid-word, the body cold since about two.",
+"The men carried {dead} up from the shaft at half past five and would not say what the lamp showed them.",
+"No cry in the night and no tracks but our own, and {dead} dead in the doorway of the mess tent.",
+"{dead} went down to check the ropes at eleven and was under them at dawn, plaster dust across the mouth."
+],
+"dawnShield": [
+"The roll at first light is complete, which has not been true since the seal came off.",
+"Sand pressed flat in a ring outside one tent and nowhere else, and every cot occupied at dawn.",
+"Something came as far as the tent lines and stopped; nobody is missing and nobody slept after.",
+"A ward was laid last night and it held, and the camp is short-tempered about being alive.",
+"Lamp oil burned down to nothing in one tent, a smell of bitumen along the lines, and no one to bury.",
+"Whatever walked the camp between two and four went back down the shaft empty-handed."
+],
+"ejectSab": [
+"The camp was right about {ejected} \u2014 the scarab was cut into the skin below the shoulder, old and well healed, and the arguing stopped for about a minute.",
+"{ejected} did not beg; ten yards past the torchline they turned and knelt facing the tomb mouth, and that settled the question.",
+"{ejected} was put out at dusk, and in the kit left behind: lamp oil, a coil of rope, and a page of the priest's text copied in a steady hand.",
+"A cultist, then. {ejected} said nothing on the walk out and smiled once, at the shaft, not at anyone.",
+"Shirt off at the last torch and there it was on {ejected}'s collarbone, burned in, not decided this week."
+],
+"ejectCrew": [
+"They took the shirt off {ejected} at the torchline and found no scarab, no mark, nothing but sunburn \u2014 {ejected} was a {roleName}.",
+"Wrong. Clean skin, clean kit, a ledger entry half-finished on the cot: {ejected} was a {roleName}.",
+"{ejected} is past the ridge now and will not last the night, unmarked, a {roleName}, and the tomb did not have to lift a finger.",
+"{ejected} walked out without arguing, which some read as guilt; the skin was unmarked and the kit was a {roleName}'s kit.",
+"No mark on {ejected}. A {roleName}, sent into the dark on a show of hands, and whoever we want is still eating with us."
+],
+"winCrew": {
+"title": "THE TOMB CLOSED",
+"body": "Both cultists accounted for. The shaft was backfilled to the second course of stone, the finds crated for Cairo under seal, and camp was struck on the fourth of December. Nobody who walked out of that valley published a word about it. The nameless priest stays nameless."
+},
+"winSab": {
+"title": "THE LAMPS OUT",
+"body": "The cultists are not outnumbered any more, and there is no one left to argue the point. What survives of the season is a set of ledgers finished in an unfamiliar hand, a shaft left open to the weather, and a telegram to Cairo blaming bad water. Nothing was ever brought up. Nothing needed to be."
+},
+"howto": [
+"Seven expedition members. Two are Cultists and know each other; everyone else wakes knowing only their own role.",
+"Night: the Cultists agree on one member to take, or agree to take no one. The Scribe divines one member and learns whether that member is a Cultist. The Medjai wards one member, and a warded member survives being taken.",
+"First light: the camp learns who died, or that nobody did. Nothing else is revealed \u2014 no roles, no targets, no who chose what.",
+"Day: the camp argues here, in this feed. Anyone may claim any role, and no claim can be proved.",
+"Vote: the camp casts one member out past the torchline, which is a death sentence. Majority carries, a tie sends no one, and the cast-out member's role is announced only after they are gone.",
+"The expedition wins when both Cultists have been cast out.",
+"The Cultists win when their number equals the number of everyone else still alive.",
+"Some members are played by the game. They accuse, defend, hedge, and lie exactly as the rest do, so treat every statement from every member as unverified."
+],
+"openingLine": "Camp log, November 1926, side valley west of the Kings: the seal is off, the roster stands at seven, and two of those names answer to what is down the shaft \u2014 the ledger does not say which.",
+"quietNight": "Nothing moved in the night and nobody is missing; the camp ate breakfast in silence and watched each other eat.",
+"wardHeld": "Something crossed the camp between two and four, the donkeys knew it well before the men did, and the roll at dawn is still complete.",
+"tieLine": "The vote split and stayed split through three counts; nobody goes out tonight, and the sun is already behind the ridge."
+}

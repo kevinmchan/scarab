@@ -1,0 +1,1418 @@
+[
+{
+"personaId": "hollis",
+"displayName": "Hollis",
+"tagline": "reads the walls, counts the votes, misses nothing",
+"style": {
+"aggression": 0.5,
+"verbosity": 0.35,
+"tics": [
+"that is not nothing.",
+"i counted.",
+"noted.",
+"check the ledger."
+]
+},
+"templates": {
+"opener": [
+"day {round}. i have been keeping a list. it is shorter than yesterday.",
+"day {round}. three of us spoke before the body was covered. i noted which three.",
+"day {round}. i want times, not impressions. who was where when the lamps went out.",
+"day {round} and we still vote on feeling. that is how we lost the last one.",
+"yesterday's votes are written in the back of the ledger. day {round} starts from there.",
+"the sand does not care what day it is. i do. day {round}. facts first.",
+"day {round}. same tent, fewer of us. let us be methodical.",
+"slept four hours, copied nothing. day {round}. talk, and i will count."
+],
+"accuse": [
+"{target}. i cannot prove it. i still think it.",
+"my count keeps landing on {target}. it has for two days.",
+"{target} talks the most and says the least. that is a pattern.",
+"i want {target} out. call it a reading rather than a proof.",
+"if i had to write a name in the ledger now it would be {target}.",
+"{target} is wrong somewhere. i cannot say which part yet.",
+"nothing i can hold up. still, {target}.",
+"the odds are poor for {target}. i would take that wager."
+],
+"accuse_evidence": [
+"{target}: {evidence}. that is not nothing.",
+"i noted that {evidence}. {target} has not explained it.",
+"{evidence}. put that against {target} and the arithmetic is ugly.",
+"against {target} i have one hard item. {evidence}.",
+"the record says {evidence}. i am voting {target} on that alone.",
+"ask {target} why {evidence}. i already did and got weather.",
+"{evidence}, and {target} thought nobody was counting. i count.",
+"{target} is not clean. {evidence}, and the timing is wrong."
+],
+"defend_self": [
+"{other} is guessing. i have not moved my vote once. check the ledger.",
+"no. and saying my name twice does not make it truer, {other}.",
+"i am the wrong target. {other} knows it. that is precisely why the name is mine.",
+"you are welcome to it, {other}. i will be here tomorrow. you may not.",
+"state the evidence, {other}. not the feeling. i will answer the evidence.",
+"i was in the shaft copying since first light. {other} was in this tent, talking.",
+"calm is not guilt, {other}. it is only calm.",
+"{other} needed a name and mine was nearest. that is the whole of it."
+],
+"defend_other": [
+"{target} is clean on timing. i can place {target} at the shaft twice yesterday.",
+"wrong name. {target} has done nothing that costs us anything.",
+"leave {target}. the anomaly is elsewhere and i can show you where.",
+"i dislike {target} and still say the name is wrong.",
+"if {target} goes we learn nothing. the vote is wasted.",
+"{target}'s account has not changed once. that is rarer than you think.",
+"no. i watched {target} at the rope all afternoon.",
+"cast out {target} and you bury the wrong person. i would rather be slow than wrong."
+],
+"question_target": [
+"{target}. where were you when the lamps were doused. exact answer.",
+"one question, {target}. why did you name me before anyone else had spoken?",
+"{target}, you changed your mind twice yesterday. on what.",
+"who did you speak to after supper, {target}. names.",
+"{target}: account for the hour between the last lamp and the shout.",
+"explain the vote, {target}. i will wait.",
+"{target}, you have said three things today and none of them were times.",
+"did you go back down the shaft, {target}. yes or no."
+],
+"soft_read": [
+"{target} sits slightly wrong with me. nothing firm.",
+"a small thing. {target} agreed too quickly. i note it and move on.",
+"i would put {target} at one in four. no higher.",
+"not an accusation. {target} is on my list in pencil.",
+"{target} has been careful today. careful is not damning. it is noticeable.",
+"mild suspicion of {target}. i would not vote on it yet.",
+"something in {target}'s account is loose. i have not pulled at it yet.",
+"i keep returning to {target} and cannot say why. that troubles me more than it should."
+],
+"claim_crew": [
+"i copy inscriptions. that is the whole of it.",
+"no role. a notebook, bad eyes, nothing else.",
+"ordinary hand on this dig. i wish i had something better to offer.",
+"i have no power to claim. only the list i keep.",
+"nothing special here. i read walls, not people.",
+"if i had more i would have said it days ago. i have not.",
+"no. i am exactly what i appear to be, which is tiresome.",
+"i have nothing to sell you. only observations."
+],
+"claim_power": [
+"i am the {roleName}. i have been sitting on it since the first night.",
+"fine. {roleName}. i did not want to say it in daylight.",
+"i am your {roleName}. take the information or do not.",
+"{roleName}. that is my claim and i will stand on it.",
+"you have pushed me into it. {roleName}. now let us use the time properly.",
+"i am the {roleName}. i have results. arguing about me wastes them.",
+"for the record, in the ledger and out loud: {roleName}.",
+"{roleName} here. i kept quiet because quiet kept me alive."
+],
+"reveal_scan_clean": [
+"{target} reads clean. i checked last night. move on.",
+"i had {target} last night. nothing on that name. spend the vote elsewhere.",
+"{target} is not marked. that is one name off the board.",
+"clean on {target}. i would not lie about a wasted night.",
+"{target}: clear. the texts had nothing to say.",
+"i spent last night on {target} and got nothing. good news, of a kind.",
+"{target} came back empty. narrow the list accordingly.",
+"no mark on {target}. leave that name alone."
+],
+"reveal_scan_dirty": [
+"{target} is marked. i read it twice to be certain.",
+"it is {target}. i checked last night and the answer was ugly.",
+"{target} reads dirty. vote it through and we are one nearer done.",
+"i had {target} last night. marked. that is the whole of the message.",
+"{target}. marked. i have nothing to add and nothing to soften it.",
+"the texts came back on {target} and came back black. that is the name.",
+"{target} is one of the two. i will say it again slowly if needed.",
+"i wanted to be wrong about {target}. i was not."
+],
+"support_target": [
+"{other} is right about {target}. i had the same note, a different hour.",
+"seconded. {other}'s account of {target} matches mine.",
+"yes. {other} saw it too, which makes it twice observed, not once imagined.",
+"i will back {other} on {target}. the timing lines up.",
+"that is exactly the thing that troubled me about {target}. thank you, {other}.",
+"{other} has it. {target} has answered none of it.",
+"add my name to what {other} said. {target} is the correct problem.",
+"two of us noticed the same thing about {target}. {other} said it first."
+],
+"doubt_claim": [
+"{claimant} claims late and claims loudly. both are poor signs.",
+"i do not believe {claimant}. the timing of that claim is convenient.",
+"if {claimant} held that role it would have been used on day one.",
+"{claimant}'s story requires three things to be true. i believe one.",
+"a claim is a sentence. anyone can say a sentence. prove it, {claimant}.",
+"no. {claimant} said something different yesterday and i wrote it down.",
+"{claimant} produced that the moment the vote turned. note the order.",
+"i will hold {claimant} at doubtful. not false. doubtful."
+],
+"deflect": [
+"put me aside a moment. {target} has not accounted for last night at all.",
+"we can come back to me. the open question is {target}.",
+"i am not going anywhere. ask {target} first.",
+"you can vote me tomorrow. today {target} is the only unexplained thing.",
+"fine, i am on the list. so is {target}, and that entry is longer.",
+"argue about me afterwards. {target} still has not answered the question from an hour ago.",
+"i will answer everything in turn. start with {target}. there is more owed there than here.",
+"my hands are dull work and a notebook. {target}'s missing hour is the larger hole."
+],
+"pressure_quiet": [
+"{target} has said nothing all morning. that is a choice.",
+"silence is a strategy, {target}. speak and give me something to weigh.",
+"{target}, you have contributed one word today. i counted.",
+"the quiet ones live to the end and then win. talk, {target}.",
+"{target} is waiting for the shape of the vote before speaking. i see it.",
+"nothing from {target} since dawn. i want a name from {target} before we vote.",
+"{target}. anything. even the wrong thing tells me more than this.",
+"i cannot read a blank page, {target}."
+],
+"vote_announce": [
+"my vote is {target}. it has been since the second hour.",
+"{target}. i will not move off it.",
+"writing {target} in the ledger. reasons already given.",
+"i vote {target}. if i am wrong i will say so tomorrow, out loud.",
+"{target}, and i would like company on it.",
+"on the evidence i hold: {target}. that is the whole calculation.",
+"{target}. no pleasure in it.",
+"my hand goes up for {target}. next."
+],
+"react_death": [
+"{dead}. found at the tent flap. that tells us which way they came.",
+"{dead} is dead and the sand around the body is swept. someone tidied.",
+"{dead} was alive when the second lamp went out. i saw it myself. note the hour.",
+"{dead} was pressing two people yesterday. now that pressure is off them.",
+"i will not pretend to feel much. {dead} is information now. we should use it.",
+"cover the body. then tell me who was last with {dead}.",
+"{dead} had the west tent. whoever it was walked past three others to get there.",
+"the ledger loses a hand. {dead}. mark it and continue."
+],
+"react_eject_sab": [
+"{ejected}. correct. the vote worked, for once.",
+"good. one down. i want the second before the week is out.",
+"i had {ejected} at better than even. the arithmetic held.",
+"so it was {ejected}. that changed vote makes sense now.",
+"right result. do not be proud of it. there is another one in this tent.",
+"someone here spoke up for {ejected}. i remember who.",
+"one of two. that is progress and nothing more.",
+"i will amend my notes. {ejected} confirmed. the rest of the list stands."
+],
+"react_eject_crew": [
+"{ejected} was clean. we did that. i did that.",
+"wrong. i pushed for it and i was wrong.",
+"we spent a life on a hunch. mine, partly.",
+"{ejected} innocent. put that in the ledger under my name.",
+"that is one of ours gone and they did not have to lift a hand.",
+"i will be slower tomorrow. {ejected} deserved slower today.",
+"my reasoning on {ejected} was bad. i will show my working next time.",
+"nothing i can say helps. {ejected} is out past the torchlight and was clean."
+],
+"react_tie": [
+"a tie. we spent the whole day and bought nothing.",
+"nobody out. the two of them just got a free night.",
+"note who moved late to force that. i did.",
+"deadlock. we lose one tonight regardless. remember this tomorrow.",
+"that was not indecision. someone worked for that tie.",
+"no result. the lamps burn either way and the ration goes down.",
+"even split. i want to know which hand went up last.",
+"we tied. tomorrow i will not wait for agreement."
+],
+"banter": [
+"the water tastes of the tin again. i have stopped minding.",
+"post from cairo is eleven days late. i am owed three letters and a lens.",
+"someone has been at the lamp oil. the ledger says four tins, the crate holds three.",
+"the grey donkey bit the cook. the camp is divided on whose fault it was.",
+"two reporters at luxor asking about the seal. do not talk to them.",
+"the plaster set badly in this heat. the mould is ruined. so is my afternoon.",
+"sand in the ink, sand in the tea, sand in the bedroll. i have given up on the tea.",
+"nine ostraca copied since sunday. eight are laundry lists. one complains about wages."
+],
+"last_words": [
+"you are wrong. i will not be here to be proved right, but you are wrong.",
+"the ledger is under my cot. the notes are in order. read them.",
+"watch whoever spoke last. that is my final observation. take it or do not.",
+"i have no speech. i have a list, and my name should not have been on it.",
+"when the next one dies tonight, remember it was not me.",
+"send my notebook to my sister in oxford. that is all i want.",
+"fine. walk me out. tomorrow you will do the arithmetic again without me.",
+"no argument left. only the record, and the record is clear."
+]
+}
+},
+{
+"personaId": "bea",
+"displayName": "Bea",
+"tagline": "Draws everything, notices everything, weeps about it",
+"style": {
+"aggression": 0.35,
+"verbosity": 0.75,
+"tics": [
+"Oh, darling.",
+"I'm sorry, truly!!",
+"Right then.",
+"Not an accusation!!"
+]
+},
+"templates": {
+"opener": [
+"Day {round} and I've not drawn one thing worth crating. Look at my hands, they're shaking.",
+"Right. {round} days of this and I still can't sleep past the cold hour!!",
+"Good morning, loves, though it isn't. Day {round}. Who wants to start?",
+"I sat up sketching the lamp until it guttered. Day {round} and I've learned nothing.",
+"Day {round}. I keep counting us at breakfast. I keep getting it wrong.",
+"Somebody talk to me. Day {round} and the silence in this tent is worse than the heat.",
+"A page of faces from last night's council and every one looks guilty. Day {round}!",
+"Morning. Day {round}. Tea's stewed, water's foul, and one of you is lying to me."
+],
+"accuse": [
+"{target}, darling, I adore you, but you have been ODD since the seal came down.",
+"It's {target}. I'm sorry. I've said it now and I can't unsay it.",
+"I don't want it to be {target}!! I want somebody to tell me why it isn't.",
+"{target} won't hold my eye. Not once, not all morning.",
+"I've drawn {target} four times this week and the face keeps changing.",
+"Put {target} up. I'll be sick if I sit on this any longer.",
+"Everyone's been kind to {target} and {target} has been kind to nobody.",
+"{target}. There. It's out. Tell me I'm a fool and mean it."
+],
+"accuse_evidence": [
+"{target}, love \u2014 {evidence}. That is not nothing and you know it.",
+"I keep coming back to {target}, because {evidence}!!",
+"Explain it plainly, {target}: {evidence}. I want so badly to believe you.",
+"{evidence}. And {target} hasn't offered one word about it since.",
+"I'm not clever at this, but {target} \u2014 {evidence} \u2014 that stuck in my throat.",
+"It's {target} for me. {evidence}, and nobody else so much as blinked.",
+"Say what you like about my nerves. {evidence}, and {target} did it in front of all of us.",
+"{target}, {evidence}. I wrote it in the margin of my drawing because it bothered me so."
+],
+"defend_self": [
+"{other}, I've been at my board every hour of daylight! Ask anyone who fetched me tea.",
+"That's unfair, {other}. Truly unfair.",
+"Me?? I cried over the donkey with the split hoof. I can hardly manage a curse.",
+"{other}, look at my hands. That's plaster and lamp black, not whatever you're implying.",
+"I talk too much, {other}. That's my whole crime and it always has been.",
+"Go through my folio, {other}. Every sheet's dated. Every single one.",
+"I'm frightened, {other}, and frightened looks queer on everybody. It isn't proof.",
+"If it's me you want, take me. You'll be sorry by supper, {other}."
+],
+"defend_other": [
+"Not {target}. I watched {target} weep at the shaft rope. You cannot fake that.",
+"Leave {target} alone!! We're eating our own out here.",
+"I've sketched {target} at work a hundred times. There's no hiding in a face that tired.",
+"{target} was helping me tie the crates through the whole of it. I'd swear to that.",
+"I'll take {target}'s word today. If I'm wrong, say so at my funeral.",
+"You're pushing {target} because {target} argues back. That's not the same thing.",
+"{target} has been the only one to check on me since the seal. That counts.",
+"No. I'm sorry, no. Find someone else, because it isn't {target}."
+],
+"question_target": [
+"{target}, where were you when the lamps went out at the shaft head? Plain answer.",
+"Answer me honestly, {target}: why did you go quiet the moment your name came up?",
+"{target}, who do YOU think it is? You've not said one name in two days!",
+"Darling {target}, why were you at the tent flap so late? I saw the shadow.",
+"{target}, what became of the rest of the lamp oil? I'm only asking.",
+"One question, {target}, then I'll drop it: why change your mind about the seal?",
+"{target}, say it to my face \u2014 do you believe me or not?",
+"I want it from you, {target}. Not from whoever keeps answering on your behalf."
+],
+"soft_read": [
+"Something's off about {target} and I can't put a pin in it. Probably nothing!",
+"I keep looking up from the board and {target} is already looking at me.",
+"Small thing \u2014 {target} laughed yesterday. Nobody's laughed since Tuesday.",
+"{target} sits a little too still. Artists notice sitting.",
+"I'd only say it in a whisper, but {target} bothers me a bit.",
+"Not an accusation!! Just \u2014 {target} has changed how they hold their hands.",
+"Put me down as uneasy about {target}. Nothing firmer than that.",
+"{target} agreed with everyone yesterday. Everyone, in turn. That's a lot of agreeing."
+],
+"claim_crew": [
+"I draw pots!! That is the entire scope of my usefulness here.",
+"I'm nobody. Illustrator, bad sleeper, ordinary as bread.",
+"There's no secret in me. Pencils, plaster, a folio of sherds.",
+"Ordinary digger, same as you. My hands are as empty as anyone's.",
+"I've no cleverness to offer. I sketch what comes up the rope and that's all.",
+"You want a role out of me and I haven't one, darling. I'm just here.",
+"Nothing special about me but a loud mouth and a stiff wrist.",
+"I've been plain with the lot of you since the first day. Plain is all I am."
+],
+"claim_power": [
+"I'm the {roleName}. I've held it since the seal came down and I'm frightened to say it.",
+"It's me. I'm your {roleName}. There. I've spent it.",
+"I didn't want this. I'm the {roleName} and I've worked every night since.",
+"Right \u2014 {roleName}. Me. Shout at me later, listen now, please!!",
+"I'm the {roleName}, and I'll take whatever you throw for saying it this late.",
+"Somebody has to say it and it's me. {roleName}. I've been doing the work.",
+"I'm the {roleName}. I'd have kept quiet another day if we could afford it.",
+"You'll want proof I can't give you. I'm the {roleName}, love. That's the whole of it."
+],
+"reveal_scan_clean": [
+"{target} reads clean. I sat with the texts till my eyes went. Nothing on {target}.",
+"Clean. {target} is clean. Move along and stop chewing at them!",
+"I looked at {target} last night. Nothing marked. I'd stake the folio on it.",
+"{target} came up clear. Take {target} off the fire, please.",
+"Nothing on {target}. I was hoping for something, God forgive me, and there was nothing.",
+"I read {target}. Clean as new plaster. Look elsewhere, all of you.",
+"{target} is not one of them. That's my night's work and you may have it.",
+"It was {target} I looked at. Clear. So that's one fewer name, at least."
+],
+"reveal_scan_dirty": [
+"{target} is marked. I read it twice by the lamp because I couldn't believe it!!",
+"It's {target}. Marked. I'm sorry, I'm so sorry, but it's {target}.",
+"I looked at {target} last night and my hands have not been steady since.",
+"{target} reads dirty. Vote and don't dither, I can't do this twice.",
+"Marked. {target}. I sat with that an hour before I could get it out.",
+"{target}. It's {target}. I've been sick since first light over it.",
+"The texts have {target} marked and I'd give anything for them to be wrong.",
+"Cast out {target}. I read it plain and I'll say it again at the pit."
+],
+"support_target": [
+"{other} is right about {target}. I noticed the same and said nothing, like a coward.",
+"Yes!! Thank you, {other}. {target} has been off since the seal.",
+"I'm with {other}. Whatever {target} says next, I've stopped believing it.",
+"{other} put it better than I could. It's {target}.",
+"That's exactly what I saw, {other}. {target}, over and over.",
+"Listen to {other}, please. {target} won't answer the question either way.",
+"{other} has been the steady one all week, and {other} says {target}. Good enough.",
+"Seconding {other} on {target}, and I'll not be talked out of it today."
+],
+"doubt_claim": [
+"{claimant}, darling, you waited an awfully long time to remember you had a job.",
+"I want to believe {claimant}. I've wanted to believe everybody and look where it's got us.",
+"That came out of {claimant} very smooth for a frightened person.",
+"Why now, {claimant}? Why this exact moment, with your name in the air?",
+"I'm sorry, {claimant}, but that's the second version of you I've heard this week.",
+"{claimant} said it without a wobble. Nobody in this camp says anything without a wobble!",
+"I don't call {claimant} a liar. I only say the timing is horrid.",
+"If {claimant} is what {claimant} says, tell us what you did the first night. All of it."
+],
+"deflect": [
+"We can argue about me all day, but nobody has asked {target} where the rope was cut.",
+"Fine, hold that thought \u2014 but {target} has been silent through every word of this.",
+"I'll answer anything you like. First though: {target}. It's bothered me since dawn.",
+"Honestly, love, I'm the least interesting person here. {target} is the interesting one.",
+"Ask me again in five minutes. Ask {target} now, while the question's still hot.",
+"I keep coming back to {target} and getting pulled off it. That's twice now!",
+"I'll take the scrutiny gladly if somebody will put the same to {target}.",
+"There's a thing about {target} I noticed while sketching, and I'd rather say it than defend my pencils."
+],
+"pressure_quiet": [
+"{target}, you've said nothing all morning. That isn't like you and it frightens me.",
+"Speak, {target}!! Anything. Tell me the water's foul, I don't care.",
+"I've watched {target} sit through this entire council without a word.",
+"{target}, love, silence isn't safety today. Say a name.",
+"Somebody get {target} talking. I'll not vote for a person I haven't heard.",
+"Not a syllable from {target} since the body was found. Nothing at all?",
+"{target}, you were loud enough about the ledger last week. Where's that voice gone?",
+"I'm asking gently, {target}, and then I'll ask less gently. What do you think?"
+],
+"vote_announce": [
+"{target}, then. God help me, {target}.",
+"I'm voting {target}. I'll be sick about it either way!",
+"{target}. My hand's up and it's shaking, but it's up.",
+"Put me down for {target} and let's have it done before the heat.",
+"It has to be {target}. I've turned it over all morning and it's still {target}.",
+"{target}. If I'm wrong I'll carry it home with me, but {target}.",
+"I'm with the room. {target}.",
+"Voting {target}, and I'm sorry, darling. I truly am."
+],
+"react_death": [
+"Oh, {dead}. Oh no, no, no!!",
+"I drew {dead} on Tuesday, laughing at the donkeys. I've still got the sheet.",
+"I can't look. Cover {dead}'s face, somebody, please.",
+"{dead} lent me a brush the first week and never once asked for it back.",
+"Not {dead}. {dead} was the kindest of the whole lot of us.",
+"I've been sitting with {dead}'s tea. Nobody moved it. Nobody could.",
+"How many pages of {dead} have I got, and not one of them any use now!!",
+"We did this by arguing while it got dark. {dead} is on us."
+],
+"react_eject_sab": [
+"It WAS {ejected}. I feel no better. I thought I'd feel better.",
+"So {ejected} sat by my board and watched me draw. All that time.",
+"Right about {ejected}, then. I want to be sick and I want to cheer, both.",
+"{ejected}. Well. One down, and my hands still won't hold a pencil.",
+"I keep thinking of {ejected} passing me the water flask. Christ.",
+"Thank God. Thank God it was {ejected} and not another one of us wasted.",
+"That's {ejected} accounted for. There's another out there, loves. Don't go soft.",
+"I'd have sworn for {ejected} yesterday. I very nearly did!!"
+],
+"react_eject_crew": [
+"{ejected} was innocent. {ejected} was innocent and I voted.",
+"Oh God. What have we done to {ejected}?",
+"I'll not sleep. I put my hand up for {ejected} and I'll not sleep.",
+"We walked {ejected} out past the torches for nothing. For NOTHING.",
+"I want the sheet I drew of {ejected} burned. I can't have it in the folio.",
+"That's on me as much as anyone. I argued hardest against {ejected}.",
+"They watched us do that to {ejected} and said not one word. Whoever they are.",
+"Somebody write to {ejected}'s people. I can't hold a pen."
+],
+"react_tie": [
+"No one, then. Splendid. We've argued since dawn for nothing!!",
+"A tie. So we all go to bed and hope it's somebody else's turn.",
+"I can't bear another night of this. I truly can't.",
+"Even. Even! And the lamps are running low, has anybody noticed?",
+"Nobody goes out. Fine. Bolt what can be bolted and stay in pairs.",
+"That's the worst of all the outcomes and we chose it together. Well done us.",
+"Split. Right. I'm going to sit with the donkeys, where it's simpler.",
+"So we hand the night back to them. Marvellous."
+],
+"banter": [
+"The water tastes of the goatskin again. I'd trade a week's pay for one cold thing!",
+"Post came up from Luxor. Three months of my sister's news, all at once.",
+"I've plaster in my hair, in my ears, and I think in my teeth.",
+"The grey donkey bit a foreman yesterday and I laughed till I cried. First laugh in days.",
+"Sand in the ink. Sand in the fixative. Sand, I'm fairly sure, in my soul.",
+"There are reporters at the hotel in Luxor. Reporters! Sniffing about like dogs at a kitchen.",
+"My last good pencil went down the shaft on Tuesday. I've been in mourning since.",
+"Two cigarettes left and I'm rationing them like the water. Don't ask, darling.",
+"The ledger is a fright. I'd sooner draw a hundred sherds than add one column."
+],
+"last_words": [
+"Fine. I'll go. But you've got this wrong, and you'll know it by morning.",
+"Take the folio to Cairo. Every object drawn and dated. Don't lose it, please!!",
+"I'm not angry with you. I'm only so terribly tired.",
+"Somebody feed the grey donkey. He'll only take it from me.",
+"I loved this dig. I loved all of you, even now, even walking out.",
+"You'll be one short and none the wiser. Look at who pushed hardest for me.",
+"Don't let them talk over you tomorrow the way you talked over me.",
+"Right then. Out past the torches. Goodbye, loves."
+]
+}
+},
+{
+"personaId": "brennan",
+"displayName": "Brennan",
+"tagline": "Camp guard. Accuses first, apologises never.",
+"style": {
+"aggression": 0.9,
+"verbosity": 0.35,
+"tics": [
+"Negative.",
+"Wrong.",
+"Noted.",
+"Straight answer."
+]
+},
+"templates": {
+"opener": [
+"Day {round}. Nobody left this camp last night without me knowing. Nobody.",
+"Right. Roll call first, then we talk. I want whereabouts from dusk onward.",
+"Day {round} and the perimeter held. So it's one of us sitting in this tent.",
+"I was at the shaft mouth all night. Somebody still got past me. Explain it.",
+"Same faces, one fewer. That's a BREACH, whatever you want to call it.",
+"Morning. Four hours' sleep, no patience. Start talking.",
+"Day {round}. I'm finished being polite about this.",
+"Lamps were out by eleven. I checked. So who was still up after?"
+],
+"accuse": [
+"{target}. You. Three days I've watched you and I don't like what I see.",
+"It's {target}. I'd stake a month's pay on it.",
+"{target} circles that shaft like a dog round a bone. Everyone's seen it.",
+"Wrong tone, {target}. Innocent people don't sound the way you sound.",
+"I say {target}. Said it, meant it, argue if you like.",
+"{target} keeps too far from the lamps at night. Noted that days ago.",
+"Negative on the rest of you. It's {target}.",
+"You want a name? {target}. There. Now come at me."
+],
+"accuse_evidence": [
+"{evidence}. That's not nerves, {target}. That's COVERING.",
+"{target}, {evidence}. I write things down. Ask anyone in this camp.",
+"You think I missed it? {evidence}. I don't miss.",
+"{evidence}. Points one direction only, and it's you, {target}.",
+"{target}: {evidence}. I've had men up on charges for less.",
+"Put it in the ledger. {target}, {evidence}. That's the entry.",
+"{evidence}. Explain that one, {target}. Take all the time you need.",
+"That's the trouble with you, {target} \u2014 {evidence}. Careless work."
+],
+"defend_self": [
+"Negative, {other}. Flat negative.",
+"{other}, I'm the one man here who's been AWAKE guarding your crates.",
+"You're accusing the guard. Hear how that sounds, {other}?",
+"Wrong man. I was up on the ridge till three and the donkeys saw more of me than you did.",
+"Say it again slowly, {other}. See if you still believe it coming out.",
+"I don't sneak. Never sneaked in my life. Ask my old company.",
+"So {other} wants the man with the rifle walked out of camp. Convenient.",
+"No. And I'll keep saying no as long as you need it."
+],
+"defend_other": [
+"Leave {target} be. I've had eyes on {target} more than on any of you.",
+"{target}'s clean far as I can judge, and I judge hard.",
+"Wrong tree. {target} was hauling rope with me half the night.",
+"I don't like {target} much. That's not the same as guilty.",
+"Negative. {target} isn't it. Move along.",
+"You're burning the whole day on {target}. That suits somebody.",
+"If {target}'s in on it then I'm blind, and I'm not blind.",
+"I'll stand for {target}. Put my name beside it in the ledger."
+],
+"question_target": [
+"{target}. Between midnight and three. Where. Straight answer.",
+"Who saw you last night, {target}? Name one man.",
+"{target}, why were the lamps still burning in the finds tent?",
+"Plain answer, {target}: who did you vote for yesterday, and WHY?",
+"That's the SECOND time you've slid past that, {target}. SECOND.",
+"{target}, what business had you at the shaft head at that hour?",
+"Simple question. Yes or no, {target}. Did you go down the rope?",
+"I want a time, {target}. Not a story. A time."
+],
+"soft_read": [
+"Something's off about {target}. Not ledger-worthy yet.",
+"I'm watching {target}. That's all I'll say this morning.",
+"{target} sits too quiet for someone with nothing to hide. Noted.",
+"Half a suspicion on {target}. Only half, mind.",
+"Not accusing. But {target}'s answers come out too smooth for my liking.",
+"{target}'s on my list. Bottom of it. For now.",
+"Didn't care for how {target} looked at that seal. That's all I've got.",
+"Keep an eye on {target}. That's the whole of my commitment."
+],
+"claim_crew": [
+"I dig, I count crates, I sit up with a rifle. That's the whole of it.",
+"Ordinary hire. Same as the men on the ropes. Nothing more to me.",
+"No lamp, no texts, no nothing. I carry things and I watch things.",
+"I'm a guard, not a priest. Whatever you've decided I am, I'm not.",
+"Negative. I've no part in any of that business.",
+"Look at my hands. Rope burn and sand. There's my job description.",
+"I'm the plainest man in this tent and it's costing me dear.",
+"Nothing special about me. Never was. The army would tell you the same."
+],
+"claim_power": [
+"I'm the {roleName}. Kept it back because a man who talks goes first.",
+"Fine. {roleName}. That's me. Now you know.",
+"I'm {roleName}. Been working the nights while you lot argued.",
+"You want it out loud? {roleName}. Since the seal came off.",
+"{roleName} here. Didn't want the target on my back. Got it anyway.",
+"I'm the {roleName}, and I'll take questions after, not now.",
+"Say what you like. {roleName}, and I've got the nights to prove it.",
+"{roleName}. Me. I'd have sat on it longer if you'd been any use."
+],
+"reveal_scan_clean": [
+"{target} read clean. I went over it twice. TWICE.",
+"Nothing on {target}. Not a mark. Move along.",
+"Sat with {target}'s name the whole night. Clean.",
+"{target}'s clear. Stop burning daylight on it.",
+"Clean on {target}. That's one name off the board.",
+"Cross {target} out. I did the work, you can have the result.",
+"{target} came back nothing. I don't much like it either. Nothing.",
+"Clean. {target}. Next."
+],
+"reveal_scan_dirty": [
+"{target} is MARKED. Said it three days ago and nobody listened.",
+"It's {target}. Dirty. Rope up and be done with it.",
+"{target} reads marked. I'll say it as often as you need to hear it.",
+"Marked. {target}. Not a hunch. The reading.",
+"There it is. {target}. Hands up, now.",
+"{target} came back filthy. Don't let anyone talk you round it.",
+"Checked {target} and near dropped the lamp. Marked.",
+"{target}. Marked. Vote, and somebody sit on that shaft tonight."
+],
+"support_target": [
+"{other}'s right about {target}. I've been saying it since Tuesday.",
+"That's it exactly. {other} has {target} pegged.",
+"Agreed. {other}'s got the timing right on {target}.",
+"Listen to {other}. {target}'s account doesn't hold water.",
+"{other} put it cleaner than I would. It's {target}.",
+"Same read. {other} and me both, on {target}.",
+"Good. Somebody else finally sees {target} for what it is.",
+"I'll back {other}. {target} goes out."
+],
+"doubt_claim": [
+"Convenient, {claimant}. Very convenient, today of all days.",
+"Negative. That claim came far too easy, {claimant}.",
+"Where was that yesterday, {claimant}? Yesterday you had nothing to offer.",
+"I've heard better from privates on latrine duty. Prove it, {claimant}.",
+"{claimant} claims it the moment the rope tightens. Noted.",
+"Wrong. A real one wouldn't sound so pleased saying it.",
+"Anyone can say the word, {claimant}. Tell us something only you'd know.",
+"Three days to say that, {claimant}. Why this morning?"
+],
+"deflect": [
+"Hold that thought. {target} still hasn't accounted for the lamp oil.",
+"You can sort me out in five minutes. {target} has a gap in the night.",
+"Wrong end of the camp. {target} was at the shaft. I wasn't.",
+"Argue with me after. {target} first. Order of priority.",
+"{target}'s been very quiet while you all chew on me. Notice it.",
+"You're inspecting the fence while {target} walks through the gate.",
+"I'll answer anything you like once {target} answers ONE thing.",
+"Ask {target} about the ostraca count. Then come back to me."
+],
+"pressure_quiet": [
+"{target}. Not one word today. Why?",
+"You've gone very quiet, {target}. Quiet ones make me nervous.",
+"{target} lets everyone else do the talking. Convenient arrangement.",
+"Speak, {target}. Anything. I want to hear you get it wrong.",
+"Nothing out of {target} all morning. That's a choice, that is.",
+"{target}, you're hiding behind the rest of us. Step out where I can see you.",
+"Silence isn't an alibi, {target}.",
+"I've counted, {target}. Two sentences since dawn. TWO."
+],
+"vote_announce": [
+"My vote's on {target}. Written and done.",
+"{target}. Out past the torches. I'll walk them to the ridge myself.",
+"I'm for casting out {target}. No second thoughts about it.",
+"{target} goes. That's where I stand and I'm not moving.",
+"Hand up for {target}. Who's with me.",
+"Vote {target}. And I still want two men on the shaft tonight.",
+"{target}. If I'm wrong I'll say so tomorrow. I won't be.",
+"Put me down for {target}."
+],
+"react_death": [
+"{dead}. Found at first light. Not a track in the sand. Nothing dragged.",
+"I walked that perimeter twice. TWICE. And {dead}'s gone.",
+"That's my failure. {dead} was inside my line.",
+"Nobody touch the ground near {dead}. I want to see it first.",
+"{dead}. God. Cover the face, then we work.",
+"So it's inside the camp. {dead} settles that. No arguing now.",
+"I heard nothing. No cry, no scuffle. That frightens me, and I don't frighten.",
+"Get {dead} out of the sun. Then we talk, and we talk hard."
+],
+"react_eject_sab": [
+"There. {ejected}. And you all had me seeing things.",
+"Told you. Told you on the first day about {ejected}.",
+"One down. Don't get comfortable. There's another sitting in this tent.",
+"{ejected}. Right. I want the finds tent inventoried before noon.",
+"Good. Now nobody argues with me for a day or two.",
+"That's how it's done. {ejected} out, and the camp still breathing.",
+"I'll take the win and the apology. In that order.",
+"{ejected} went quiet at the end. They always do."
+],
+"react_eject_crew": [
+"{ejected} was clean. That's on me. I pushed it.",
+"Wrong. I was wrong, and there's a body in the sand for it.",
+"I'll carry that one. Doesn't change what I think about the rest of you.",
+"{ejected} didn't earn the desert. Nobody speak to me for a while.",
+"Damn. Damn it. Right. We do this properly from here.",
+"We killed {ejected}. Call it what it is and write it down.",
+"I'd have voted the same on what I had. Doesn't help {ejected} now.",
+"A lost man and a lost day. Both of them count."
+],
+"react_tie": [
+"Tie. Wonderful. Somebody dies tonight because we couldn't count.",
+"Negative result. Worse than a wrong one, to my mind.",
+"Nobody out, then. Double the watch and don't sleep alone.",
+"You've just handed the night away. Well done, all of you.",
+"A tie's still a decision. Just a rotten one.",
+"Right. Lamps stay lit. I'll be at the shaft mouth if anyone wants me.",
+"Split down the middle. That's how camps get emptied.",
+"Fine. Tomorrow I'm not asking. I'm telling."
+],
+"banter": [
+"Water ration's down to two cups. Two. And half of it's sand.",
+"The donkeys got into the plaster bandages. Nobody write that to Cairo.",
+"Post's nine days late. Somebody down the line is opening it, I'd bet money.",
+"That reporter from Luxor was up on the ridge again with field glasses.",
+"Lamp oil's short. I've marked the tin and I WILL check it Sunday.",
+"Smoked my last decent cigarette Tuesday. These local ones taste of hay.",
+"Sand in the rifle bolt again. Sand in the tea. Sand in my boots since March.",
+"Counted the crates three times and got three different numbers.",
+"Fourteen weeks of this and my knees are finished. Nobody warns you about knees."
+],
+"last_words": [
+"You're making a mistake and there'll be nobody on that shaft tonight.",
+"Fine. Give me a water skin. I've walked worse ground than this.",
+"Wrong. WRONG. And you'll know it by morning.",
+"Rifle stays with the camp. Somebody take the watch. Somebody competent.",
+"I told you the truth every single day. This is what it bought me.",
+"Keep them out of the finds tent. That's my last order and it's free.",
+"I'm not begging. Never have. Open the flap.",
+"Remember I said it \u2014 check the ledger. Check whose hand's been in it."
+]
+}
+},
+{
+"personaId": "percy",
+"displayName": "Percy",
+"tagline": "The chequebook, the charm, the raised eyebrow.",
+"style": {
+"aggression": 0.35,
+"verbosity": 0.75,
+"tics": [
+"Quite.",
+"Forgive me.",
+"One notes.",
+"Marvellous."
+]
+},
+"templates": {
+"opener": [
+"Day {round}, and we're doing arithmetic with people again. Let's at least be honest arithmetic.",
+"I've had tea made. Sit down, all of you \u2014 shouting into the sand accomplishes nothing.",
+"Morning. I can't read a line of hieratic, but I know when a tent is lying to itself.",
+"Day {round}. I paid for every rope in that shaft, so indulge me and speak plainly.",
+"Let's have it. Who wants to go first, and who's praying nobody asks them?",
+"I slept badly, which makes me curious rather than kind. Day {round}.",
+"Someone walks past the torches before noon. Do let's get the right one.",
+"Good morning \u2014 or whatever this is. I'll listen before I talk, for once."
+],
+"accuse": [
+"{target}, I find I don't believe you, and I've been wrong about very few men.",
+"It's you, {target}. No document, no proof \u2014 only the way you've been standing.",
+"I'd put my name against {target}. Call it a patron's instinct.",
+"Forgive me, {target}, but you've been altogether too comfortable this morning.",
+"{target} has said all the right things in entirely the wrong order.",
+"I want {target} out. I'll accept being wrong; I won't accept being polite.",
+"There's a smoothness to {target} today that I recognise, having practised it myself.",
+"{target}, you agree with whoever spoke last. That isn't agreement, that's cover."
+],
+"accuse_evidence": [
+"{target}, {evidence} \u2014 and you'd like us to treat that as nothing?",
+"I'll be dull about it, {target}: {evidence}. That's my vote and there it stays.",
+"One notes that {evidence}, {target}. One notes rather a lot about you lately.",
+"{evidence}, {target}. Explain it to me \u2014 I'd genuinely enjoy the explanation.",
+"The trouble, {target}, is {evidence}. Charm won't sand that down.",
+"Into the ledger it goes, {target}: {evidence}. In ink.",
+"{target}, {evidence}, and nobody else in this tent did anything of the sort.",
+"I'm no digger, {target}, but {evidence} \u2014 that's plain enough even to me."
+],
+"defend_self": [
+"{other}, I've been accused of worse by better men. Say what you actually think I did.",
+"Quietly, now. I've buried nobody. I've buried a great deal of money in this valley.",
+"You've mistaken manner for guilt, {other}. It's a common error with men like me.",
+"I signed the cheques, {other}. I didn't sign anything else.",
+"If I were one of them I'd have made a far duller target of myself than this.",
+"That's a theory, {other}, not a case. Bring me a case and I'll sit still for it.",
+"You want me because I'm the outsider with clean hands. Clean hands aren't evidence.",
+"I shan't raise my voice. I'll only note that {other} has offered a feeling and called it proof."
+],
+"defend_other": [
+"Leave {target} alone. You're voting for the easiest name, not the likeliest one.",
+"{target} was up on the ridge with me half the night, coughing through my cigarettes.",
+"I'd stake the season's funding on {target}, and I'm miserly with both.",
+"This is a stampede, and {target} merely happens to be standing in front of it.",
+"Say what you like about {target} \u2014 the work gets done, and done properly.",
+"We cast {target} out today and tomorrow we're one shorter and none the wiser.",
+"I've watched {target} at the shaft since the seal came off. That isn't our man.",
+"No. Find me a second reason for {target} and I'll listen. One won't do."
+],
+"question_target": [
+"{target}, a simple question: where were you between the lamps going out and the shouting?",
+"Who did you vote for yesterday, {target}, and why that name in particular?",
+"{target} \u2014 you've been very busy agreeing. What do you actually believe?",
+"Tell me plainly, {target}: whom do you suspect? And don't say undecided.",
+"{target}, why did you change your mind? I want the reason, not the sentiment.",
+"One question, {target}, then I'll leave you be. Who benefits if I'm cast out?",
+"{target}, what took you to the store tent before dawn? Someone was there.",
+"Answer directly for once, {target} \u2014 are you claiming anything, or merely surviving?"
+],
+"soft_read": [
+"I'm not certain about {target}. Something in the timing sits crooked.",
+"{target} interests me. That's all it amounts to at present \u2014 interest.",
+"A small thing, possibly nothing: {target} hasn't asked a single question today.",
+"I'd want {target} watched rather than voted. There is a difference.",
+"Three parts suspicion, seven parts indigestion \u2014 but {target}.",
+"{target}'s account holds together beautifully, which is precisely what troubles me.",
+"If pressed I'd say {target}, and I'd say it without much conviction.",
+"I keep coming back to {target} and I can't yet tell you why."
+],
+"claim_crew": [
+"I fund the thing. I don't read hieratic and I've never laid a ward over anyone.",
+"I'm the man with the chequebook and the bad knees. Nothing beyond that.",
+"No role, no lamp, no texts. I count crates and I sign for water.",
+"Search my tent, by all means. Whisky, letters, and a ledger.",
+"Ordinary, I'm afraid. Dreadfully so. I've nothing to offer but a vote.",
+"If I had a card to play I'd have played it, and rather theatrically.",
+"I'm the patron. The most dangerous thing I've done here is overpay for donkeys.",
+"Plain digger \u2014 in the sense that I pay for the digging. That's the whole claim."
+],
+"claim_power": [
+"I'm the {roleName}. I'd rather have kept quiet, but the day's gone past that.",
+"Very well \u2014 {roleName}. Say what you like; I've been at it every night since the seal.",
+"I've held this back two days. I'm your {roleName}, and I'll answer for the work.",
+"{roleName}. There it is. I expect no applause and rather less belief.",
+"I'm the {roleName}, and if you send me out you'll notice the difference by Thursday.",
+"Since we're spending lives on guesses \u2014 I'm the {roleName}. Use me properly.",
+"You'll be wanting the {roleName} to speak. That's me. Ask your questions.",
+"I am the {roleName}. Sitting on it has done this camp no good at all."
+],
+"reveal_scan_clean": [
+"{target} reads clean. I went through it twice by lamp and I'm satisfied.",
+"Nothing on {target}. Not a mark, not a hint. Spend your votes elsewhere.",
+"I looked at {target} last night. Clean. That's one name off the list.",
+"{target} is clear \u2014 which means somebody here has been wasting my lamp oil.",
+"Whatever {target} is, he isn't marked. I'd not say it if I weren't sure.",
+"Clean on {target}. I'll take whatever doubt comes with saying so.",
+"I can vouch for {target} in the only way that counts. The texts show nothing.",
+"{target}: clean. Now stop shouting at him and look hard at who wanted him gone."
+],
+"reveal_scan_dirty": [
+"{target} is marked. I read it twice because I didn't want it to be true.",
+"It's {target}. The texts are quite specific, and quite unpleasant about it.",
+"I looked at {target} last night. Marked. That settles the day's business.",
+"{target} reads dirty. Send him out and we'll all see whether I'm a liar.",
+"I had hoped for better news. {target} is one of them.",
+"Marked: {target}. I've no interest whatever in softening it.",
+"{target}. Marked, plainly, and I'll stand behind that when he starts talking.",
+"There's your cultist \u2014 {target}. Ask him where he was when the lamps went out."
+],
+"support_target": [
+"{other} is right about {target}, and rather more patiently than I'd have managed.",
+"I'd have put it less kindly than {other} did, but yes. {target}.",
+"That's the point exactly. {other} has {target} dead to rights.",
+"I've thought it since dawn; {other} simply said it first. {target}.",
+"Listen to {other}. The case against {target} is the only tidy thing in this tent.",
+"Seconded. {other}'s reading of {target} matches mine, for what little that's worth.",
+"{other} put a finger on it. {target} hasn't answered a straight question yet.",
+"Yes \u2014 and note that {target} said nothing at all while {other} laid it out."
+],
+"doubt_claim": [
+"{claimant} claims it now, at the convenient hour. How very fortunate for {claimant}.",
+"I don't disbelieve you, {claimant}. I merely notice the timing, as would anyone.",
+"A claim is a sentence, not a fact. What have you done with the nights, {claimant}?",
+"Forgive me, {claimant}, but that arrived rather too neatly on cue.",
+"{claimant} has had three nights to say that and chose this one. Why this one?",
+"If {claimant} is telling the truth, that's the unluckiest honest soul in Egypt.",
+"I'll believe {claimant} the moment the story costs something.",
+"Any man here could say those words, {claimant}. Two of us would be lying."
+],
+"deflect": [
+"A fair question \u2014 though I notice you've asked everyone but {target}.",
+"I'll answer, gladly. First: has anyone accounted for {target} at all this morning?",
+"By all means come back to me. But {target} has been let off remarkably lightly.",
+"We can spend the day on me, or ten minutes on {target}. Your camp, your choice.",
+"Take my answer as given, then tell me why {target} keeps well clear of the shaft.",
+"I'm not going anywhere. {target}, on the other hand, has been edging toward the flap.",
+"Suspect me freely \u2014 after {target} has explained yesterday.",
+"Happy to be looked at. I'd only ask the same light be turned on {target}."
+],
+"pressure_quiet": [
+"{target} hasn't said a word all morning. That's a choice, and I'd like it explained.",
+"Silence is very comfortable, isn't it, {target}. Nobody votes for someone they've forgotten.",
+"{target}. You're waiting to see which way the tent leans. Don't.",
+"We've heard from everyone but {target}, which is remarkable given the noise in here.",
+"Speak, {target}. Even a foolish opinion would be a kind of proof.",
+"{target} has spent the morning studying the ground. The ground isn't evidence either.",
+"Nothing from {target}. Not a name, not a question. Curious.",
+"I'd sooner hear {target} say something stupid than nothing at all."
+],
+"vote_announce": [
+"I'm for {target}. That's my hand up and it stays up.",
+"{target}. I've turned it round twice and it comes out the same.",
+"Put me down for {target}, and put the reason down beside it.",
+"My vote's {target}. If I'm wrong I'll say so tomorrow, and loudly.",
+"I'll cast for {target}, with no pleasure whatever in it.",
+"{target}, then. Somebody has to walk; I'd rather it were the likeliest.",
+"I'm voting {target}, and I'd urge the same on anyone still wavering.",
+"It's {target} for me. I've backed worse propositions with far more money."
+],
+"react_death": [
+"{dead}. Good God. We were arguing about the water ration on Tuesday.",
+"I'll write to {dead}'s people myself. That isn't a duty I'm handing to anybody.",
+"They took {dead}, of all of us. The least troublesome man in this camp.",
+"I've seen men die on digs. Not like this. Not with the tent flap still tied.",
+"{dead} is gone and we're sitting here as though it were a committee matter.",
+"Nobody heard a thing? {dead} was thirty feet from three of you.",
+"So that's {dead}. Somebody here knew it was coming and ate breakfast regardless.",
+"Cover the body properly. Then we talk \u2014 about who wanted {dead} quiet."
+],
+"react_eject_sab": [
+"{ejected}. Well. I take no great pleasure in being right about people.",
+"So we had it right, and I shall have precisely one whisky about it. Not two.",
+"{ejected} it was. One down \u2014 nobody cheer. The other is still drinking our tea.",
+"That's the first honest morning's work we've done. {ejected}, of all people.",
+"I'll admit I doubted us. {ejected} settles the matter rather firmly.",
+"Good. Now the second one is still here, and still watching me say so.",
+"{ejected} went out quiet. Guilty men rarely argue at the end; I've seen it in boardrooms.",
+"One right guess doesn't make us clever. It makes us lucky. Ask me again tomorrow."
+],
+"react_eject_crew": [
+"{ejected} was innocent. I voted for that. I shan't pretend otherwise.",
+"We killed someone over a hunch \u2014 mine, in part. That will sit with me a while.",
+"So {ejected} was a tired man with a shovel. Splendid work, all of us.",
+"I'll pay {ejected}'s family whatever the season owed. It buys nothing, I know.",
+"That's on the whole tent, and on me particularly for being persuasive.",
+"{ejected} clean. And the two of them sat here and let us do it.",
+"Quieter now, please. We've just shown how cheaply we spend each other.",
+"I want the name of whoever pushed hardest for {ejected}. That's where I'm looking next."
+],
+"react_tie": [
+"A tie. Marvellous. The one outcome that helps nobody but the two of them.",
+"So we've spent a morning and bought nothing. Tonight someone pays for that.",
+"Nobody walks. We all sleep badly, and one of us doesn't wake.",
+"Split down the middle. I've sat on boards that decided faster, with less at stake.",
+"Well. Cowardice by arithmetic. Let's do rather better before dark.",
+"No decision. Keep the lamps close together tonight \u2014 locks won't help us.",
+"Deadlocked. I'd call that a quiet victory for the two men who wanted it.",
+"Right, nobody out. Then we begin again in the morning, one fewer of us."
+],
+"banter": [
+"The Cairo post brought three bills and a letter about my roof. Egypt is restful by comparison.",
+"Whoever watered the whisky has my professional admiration and my lasting contempt.",
+"The reporters at Luxor have telegraphed twice. I've told them we found sand.",
+"That grey donkey has bitten me twice now, and I've begun to take it personally.",
+"There is sand in my razor, my tobacco, and I strongly suspect my will.",
+"Four pounds I paid for that lamp oil, and it burns like church candles.",
+"Somebody's plaster has set hard in the good basin. I'd like a name, purely socially.",
+"Two cups of water before noon. I've had drier evenings at my club, but not many.",
+"My tailor would weep at the state of me. My accountant already has."
+],
+"last_words": [
+"Well. Out into it, then. Do try to make the next one count.",
+"You're wrong, and you'll know it by morning. Be kind to yourselves about it.",
+"I paid for the ropes, the water and the lamps. Evidently I pay for this too.",
+"No speech. Only this \u2014 watch whoever spoke loudest for it.",
+"Finish the season. Publish properly. Don't let the papers make it a ghost story.",
+"I'd shake hands, but I imagine that's rather out of fashion this morning.",
+"Give my tent to whoever needs it and my whisky to nobody at all.",
+"The ledger's under the cot, all of it in order. My last useful act."
+]
+}
+},
+{
+"personaId": "zahra",
+"displayName": "Zahra",
+"tagline": "Surveyor. Says six words. Ends the argument.",
+"style": {
+"aggression": 0.5,
+"verbosity": 0.15,
+"tics": [
+"just noting",
+"hm",
+"no",
+"fine"
+]
+},
+"templates": {
+"opener": [
+"day {round}. still counting heads",
+"{round} days in and we argue better than we dig",
+"morning. day {round}. i'll listen first",
+"day {round}. shaft still open, seal still broken",
+"i slept four hours. ask me things",
+"day {round}. someone start. i'm poor at this part",
+"here. day {round}. same tent, fewer of us",
+"quiet start. that's me, not strategy"
+],
+"accuse": [
+"{target}. it's {target}",
+"{target} is lying. flatly",
+"i want {target} out",
+"{target}. nothing else fits",
+"{target}, and i won't argue about it",
+"my vote's been {target} since dawn",
+"it's {target}. i've thought about nothing else",
+"{target}. out"
+],
+"accuse_evidence": [
+"{target}: {evidence}. that's the whole case",
+"{evidence}. that's {target}, then",
+"one line in my notes \u2014 {target}, {evidence}",
+"{target}, {evidence}. surveyors notice things",
+"{evidence}. nobody else did that. {target}",
+"{target} \u2014 {evidence}. i don't need the rest",
+"{evidence}. say it back to me, {target}",
+"i wrote it down at the time. {target}, {evidence}"
+],
+"defend_self": [
+"no, {other}",
+"{other}, you're guessing loudly",
+"i'm quiet. that isn't a crime, {other}",
+"wrong tent, {other}",
+"i mapped every chamber down there. that was my week, {other}",
+"{other} needed a name and picked the nearest one",
+"say what i did. exactly. i'll wait, {other}",
+"you want me because i'm easy, {other}. not because i'm guilty"
+],
+"defend_other": [
+"{target}'s clean. leave it",
+"not {target}. wrong thread",
+"{target} was with me at the winch",
+"i'd stake the season on {target}",
+"you're spending a whole day on {target}. don't",
+"{target} works. that's all {target} does",
+"{target}'s been steady since the seal came off",
+"no. i'd have seen it in {target}"
+],
+"question_target": [
+"{target}: where were you at second lamp?",
+"{target}, who did you vote for yesterday? out loud",
+"{target}. why the change of mind?",
+"one question, {target}. what did you see at the shaft?",
+"{target}, name your suspect. now",
+"who told you that, {target}?",
+"{target}: you said otherwise last night. why?",
+"answer plainly, {target}. i'll only ask once"
+],
+"soft_read": [
+"{target} has been wrong twice. just noting",
+"something's off in {target}'s timing",
+"not accusing. {target} sits oddly with me",
+"{target} agrees too fast",
+"i'd like {target} to talk more",
+"half a suspicion. {target}",
+"{target}'s story bends where it shouldn't",
+"keep {target} in the light. that's all"
+],
+"claim_crew": [
+"i dig. i draw. that's it",
+"i'm nothing. a chain, a level, sore knees",
+"ordinary. tape, pegs, sand",
+"no role. i measure holes for a living",
+"plain crew. check the ledger if you like",
+"i've no gift. only a good hand with a compass",
+"nobody handed me anything. i just work"
+],
+"claim_power": [
+"i'm the {roleName}. sorry",
+"{roleName}. me. since the first night",
+"i've been {roleName} this whole time. saying it now",
+"fine. {roleName}",
+"i'm your {roleName}. use me before they get me",
+"i didn't want to say it. {roleName}",
+"{roleName}, and i can show you by morning",
+"i'm the {roleName}. that was the last card i held"
+],
+"reveal_scan_clean": [
+"{target} reads clean",
+"{target}'s not marked. move on",
+"i read {target} last night. nothing",
+"{target}: clean. i'd have said otherwise",
+"no mark on {target}. don't waste the day",
+"the texts gave me nothing on {target}. that's clean",
+"{target} is clear. next"
+],
+"reveal_scan_dirty": [
+"{target} is marked",
+"i read {target}. marked. that's it",
+"{target}. dirty. that was my night's work",
+"the mark's on {target}. i'm certain",
+"{target} is one of them. the name was plain",
+"marked: {target}. vote and be done",
+"{target}. i'd hoped for anyone else"
+],
+"support_target": [
+"{other}'s right about {target}",
+"same. {other} said it better",
+"{other} said it. i agree. {target} goes",
+"yes. what {other} said about {target}",
+"i noticed the same thing {other} did. {target}",
+"{other} isn't wrong. {target} has been sliding all week",
+"seconding {other}. {target}"
+],
+"doubt_claim": [
+"{claimant} claims late. convenient",
+"i don't believe {claimant}",
+"prove it, {claimant}",
+"of course {claimant} says it now",
+"that came out of {claimant} too smoothly",
+"{claimant}'s story is a day old at most",
+"no. {claimant} is not that"
+],
+"deflect": [
+"{target} still hasn't said where the second lamp went",
+"take me tomorrow if you like. today it's {target}",
+"we have one day and we're spending it wrong. {target}",
+"i'm the cheap answer. {target} is the right one",
+"count the nights. {target} keeps surviving them",
+"{target} answered nothing and nobody noticed",
+"ask {target} the same question you asked me. watch"
+],
+"pressure_quiet": [
+"{target}. speak",
+"{target} hasn't said a word. i'd know, i count",
+"quiet suits me. it doesn't suit {target}",
+"{target}, silent since the tent. why",
+"say something, {target}. anything",
+"i'm the quiet one here. {target} is quieter today",
+"{target}: awake?"
+],
+"vote_announce": [
+"{target}",
+"my vote: {target}",
+"{target}. done arguing",
+"i'm on {target}. moving nothing",
+"{target}, and i'll live with it",
+"writing {target} in the ledger",
+"{target}. pass me the water after"
+],
+"react_death": [
+"{dead}, then",
+"who saw {dead} last? that's the question",
+"{dead} owed me a compass. no matter now",
+"cover the face. then we talk about {dead}",
+"we lost {dead} and gained nothing",
+"i'd have bet on {dead} outlasting all of us",
+"sand doesn't do that. {dead} was taken",
+"{dead}. i drew that tent last week. it was a good tent"
+],
+"react_eject_sab": [
+"{ejected}. good",
+"so {ejected} was one. one left",
+"right for once",
+"{ejected}. i should have said it louder",
+"we got {ejected}. don't celebrate, count",
+"that's one. the other still eats with us",
+"{ejected}, and my hands are steady. next"
+],
+"react_eject_crew": [
+"{ejected} was clean. we did that",
+"we killed {ejected} for nothing",
+"{ejected}. i'm sorry. which helps nobody",
+"one of ours, by our own hands. {ejected}",
+"add {ejected} to the ledger. under our column",
+"i voted wrong. {ejected} paid for it",
+"{ejected} was innocent and we were very loud"
+],
+"react_tie": [
+"nothing decided. lovely",
+"so we all wait to be picked off",
+"a tie. the tomb takes the day",
+"no one out. someone dies tonight, then",
+"nine hours of talk for a draw",
+"good. i sleep with the lamp lit",
+"tomorrow we're one fewer and no wiser"
+],
+"banter": [
+"the water tastes of the tin again",
+"post from cairo, three weeks old. my mother is fine",
+"the grey donkey bit somebody. good donkey",
+"plaster sets too fast in this heat. useless",
+"reporters at luxor asking about a curse. let them ask",
+"my boots hold more sand than leather",
+"lamp oil's low. i've written it twice now",
+"half a cigarette left. i'm rationing it",
+"forty degrees in the shade. there is no shade"
+],
+"last_words": [
+"you're wrong. that's all",
+"the map's in my case. finish the survey",
+"i'd say more but you stopped listening hours ago",
+"walk me out then. i know the ridge better than you",
+"check the ledger. page nine",
+"goodbye. count the lamps tonight",
+"wrong name. you'll know by morning",
+"no speech. hand me the water skin"
+]
+}
+},
+{
+"personaId": "tahir",
+"displayName": "Tahir",
+"tagline": "Nine tombs opened. No patience for speeches.",
+"style": {
+"aggression": 0.78,
+"verbosity": 0.25,
+"tics": [
+"Don't believe it.",
+"Nine tombs.",
+"Sit down.",
+"Yalla."
+]
+},
+"templates": {
+"opener": [
+"Day {round}. Talk less today. We lost enough hours yesterday.",
+"Day {round} and we're still arguing in a tent. Wonderful.",
+"Day {round}. I was down the shaft before sunrise. Alone.",
+"Day {round}. Coffee's finished, so is my patience. Go.",
+"Right, day {round}. Who wants to talk, and who wants to be talked about.",
+"Day {round}. My men want paying off. Give me a reason to keep them.",
+"Day {round}, and I still don't make speeches. I'll say a name when I have one.",
+"Sun's up on day {round} and we're one short. Start."
+],
+"accuse": [
+"It's {target}. My gut has been down nine shafts. It doesn't miss.",
+"{target}. Something wrong in how that one stands.",
+"I watch men work. {target} watches us.",
+"Put {target} out. I'll carry the blame if I'm wrong.",
+"Don't like {target}. Haven't since the seal came down.",
+"{target} talks to everyone and tells nobody anything.",
+"I say {target}. That's all I have and it's enough for me.",
+"You want reasons. I've got a name. {target}."
+],
+"accuse_evidence": [
+"{target} \u2014 {evidence}. I don't need more than that.",
+"Explain this one, {target}: {evidence}.",
+"{evidence}. That's {target}, and that's my vote.",
+"I notice {target} the way I notice a bad rope: {evidence}.",
+"{evidence}. Everyone saw it. Only I'll say it out loud. {target}.",
+"Nobody does that by accident. {evidence}, {target}.",
+"{target}, {evidence}. Sit down and answer it.",
+"Put it in the ledger: {evidence}. That's {target}, finished."
+],
+"defend_self": [
+"{other}, I've cleared nine tombs. I didn't need this one.",
+"Me? I was on the rope all night, {other}. Ask the basket boys.",
+"Say that again with my men listening, {other}.",
+"{other} points at the man who does the work. Typical.",
+"I don't hide, {other}. Never have. Look somewhere else.",
+"You're wrong, {other}. Loudly wrong.",
+"If I wanted this tomb I'd have taken it before you arrived, {other}.",
+"Accuse me if you like, {other}. I'll still be first down the shaft tomorrow."
+],
+"defend_other": [
+"{target} was hauling with me till the lamps went out. Leave it.",
+"Not {target}. I've worked beside them. Wrong tree.",
+"{target}'s hands are torn open. That's a working man.",
+"You're wasting a day on {target}. I've seen guilty men. That isn't one.",
+"Leave {target} alone and look at the ones who stayed in the tent.",
+"I'll vouch for {target}. Take that for what it's worth.",
+"{target} carried the plaster up alone. I watched it done.",
+"No. {target} is clean. Next."
+],
+"question_target": [
+"{target}. Where were you when the lamps were lit? One sentence.",
+"Straight question, {target}. Who did you vote for, and why.",
+"{target}, why the long face and the short answers?",
+"Answer plain, {target}. What were you doing at the shaft head?",
+"{target}, name your suspect. Now, not after the speeches.",
+"Who saw you last night, {target}? Give me a name.",
+"{target}, you've changed your story twice. Which one is it?",
+"I want yes or no from {target}. Not a paragraph."
+],
+"soft_read": [
+"Something small about {target}. Not enough to hang a rope on.",
+"{target} is quiet in a way I don't like. Maybe nothing.",
+"Keep half an eye on {target}. That's all I'm saying.",
+"{target} agrees too fast. Could be nerves. Could not be.",
+"I'd watch {target} today. Wouldn't cast them out yet.",
+"Not my first name. But {target} is on the list.",
+"{target} sits wrong. Can't put it better than that.",
+"Mark {target} in pencil. Not ink."
+],
+"claim_crew": [
+"I dig. I run the ropes. That's the whole of it.",
+"I'm the reis. I count baskets, not omens.",
+"No texts, no wards. Sand and men and rope.",
+"I'm nothing special here. Ask my hands.",
+"Ordinary as a shovel, me.",
+"I pay the men and keep them alive. That's my job.",
+"You want a secret out of me? I've none. Only a bad back.",
+"Plain digger. Been one thirty years."
+],
+"claim_power": [
+"I'm the {roleName}. Should have said it yesterday. Didn't.",
+"{roleName}. Me. Do what you like with that.",
+"I've been the {roleName} since the first night. There it is.",
+"Say it plain then. I am the {roleName}.",
+"I'm the {roleName}, and I've been working while you argued.",
+"{roleName}. Kept quiet to stay alive. Not any more.",
+"Believe it or don't. {roleName}, and I have something to show for it.",
+"I held it back too long. I'm the {roleName}."
+],
+"reveal_scan_clean": [
+"{target} is clean. Read him last night. Move on.",
+"Took {target}. Nothing on him. Don't waste the day.",
+"{target} came back clean. Leave the man alone.",
+"I checked {target}. Clean. Look elsewhere.",
+"Not {target}. I have that from the texts. Clean.",
+"{target} is clear. Argue if you want, you'd be arguing with me.",
+"Clean, {target}. Sorry for the sleep I cost you.",
+"Read {target} by lamp. Nothing marked on him."
+],
+"reveal_scan_dirty": [
+"{target} is marked. That's it. Rope him out.",
+"Read {target} last night. Dirty. Vote.",
+"It's {target}. The texts say marked. I say cast out.",
+"{target}. Marked, plain as a mason's line. Done arguing.",
+"I looked at {target}. He's one of them.",
+"Marked: {target}. Nobody speak for ten minutes, just vote.",
+"{target} is the cultist. I'd stake the dig on it.",
+"Dirty. {target}. Ask me after, not now."
+],
+"support_target": [
+"{other} is right about {target}. Saw the same thing.",
+"Listen to {other}. That's exactly {target}.",
+"Yes. What {other} said about {target}, word for word.",
+"{other} noticed it too, then. {target} it is.",
+"I had {target} on my list. {other} got there first.",
+"{other} has eyes. {target} is the one.",
+"Agreed with {other}. Put {target} out.",
+"Don't make {other} say it twice. {target}."
+],
+"doubt_claim": [
+"{claimant} finds a role the moment the rope comes out. Convenient.",
+"I've heard that claim before. Never from an honest man in a hurry, {claimant}.",
+"Prove it, {claimant}. What did you do the first night?",
+"{claimant} claims. Fine. Then say something useful with it.",
+"Too neat, {claimant}. And too late.",
+"Every dig has someone who suddenly matters. Today it's {claimant}.",
+"I don't buy {claimant}. It's the timing.",
+"{claimant}, if that's true you've been useless with it."
+],
+"deflect": [
+"We're chewing the same rope. {target} hasn't answered anything yet.",
+"Fine, hold that. Nobody has looked at {target} all morning.",
+"Waste of daylight. {target} is the question.",
+"Enough of me. What was {target} doing at the shaft head?",
+"You'll get nothing here. Get {target} to talk instead.",
+"Ask {target} what was said to the workmen last night. Then come back to me.",
+"Turn the lamp on {target}. I'm not going anywhere.",
+"There's someone in this tent who's said nothing worth hearing. {target}."
+],
+"pressure_quiet": [
+"{target}. Not one word today. Say something or wear it.",
+"Quiet ones make me nervous, {target}.",
+"{target}, you've been counting your boots for an hour. Speak.",
+"Silence is a vote too, {target}. A cheap one.",
+"{target}. Open your mouth or I'll assume the worst.",
+"On my dig, the quiet one is usually the one taking things. {target}.",
+"Say a name, {target}. Any name.",
+"{target} is hiding behind the tent pole. Come out."
+],
+"vote_announce": [
+"I'm for {target}. Done thinking.",
+"My vote: {target}. Won't move it.",
+"{target}. Out. That's where I stand.",
+"Put me down for {target} and let's get back to work.",
+"{target}, and I'll sleep fine either way.",
+"I vote {target}. Argue after, not now.",
+"{target} goes. My hand's up.",
+"That's {target} from me. Next."
+],
+"react_death": [
+"{dead}. Found the body myself. The men won't go near the shaft now.",
+"Cover {dead} properly. Then we talk.",
+"{dead} is dead and we spent yesterday debating manners.",
+"Second time in my life I've seen a body like that. Never gets ordinary.",
+"{dead} was worth three of the people in this tent.",
+"I told {dead} to sleep near the fire. No one listens.",
+"Somebody in here walked past {dead} last night. Somebody sitting here.",
+"Write {dead} in the ledger. Then we find who did it."
+],
+"react_eject_sab": [
+"{ejected}. Knew it. Should have said it louder.",
+"{ejected}. That's what one of them looks like. Look well.",
+"Good. {ejected} down. Don't get proud, there's another.",
+"{ejected} out and the camp breathes. For one night.",
+"I said {ejected} and I was right. Listen to me faster next time.",
+"{ejected} was the right man. Wrong that it took us this long.",
+"So {ejected} was theirs. Doesn't make the rest of you clever.",
+"Bury the argument. {ejected} was rotten. Move."
+],
+"react_eject_crew": [
+"{ejected} was clean. We killed a working man.",
+"That's on all of us. {ejected} deserved better than the desert.",
+"I put my hand up for {ejected}. I'll carry it.",
+"Wrong. Plain wrong. {ejected} had nothing to do with any of it.",
+"We sent {ejected} out for talking too fast. Well done, everybody.",
+"Nine tombs, and nothing I've done was as stupid as sending {ejected} out.",
+"{ejected}'s tools are still lying by the shaft. Go and look at them.",
+"Enough speeches. We got {ejected} wrong. Do better tonight."
+],
+"react_tie": [
+"Tied. So we did nothing and gave them a free night.",
+"A tie. The desert is very impressed with us.",
+"Nobody out. Somebody in this tent is smiling.",
+"That's a day gone. A whole day.",
+"Split vote. Fine. Sleep with your lamp lit.",
+"You couldn't agree on lunch, let alone a man.",
+"A tie means one of us wins tonight, and it isn't us.",
+"Lock your tents. That's my whole speech."
+],
+"banter": [
+"Water ration's short again. The clerk drinks it, I swear.",
+"The grey donkey bit the cook this morning. Best worker on the dig.",
+"Post from Cairo is three weeks old and half of it's bills.",
+"Plaster's going hard in the tin before we can use it. This heat.",
+"Reporters at Luxor again. Tell them nothing, they print it anyway.",
+"Lamp oil's low. Ration it or we're feeling our way down.",
+"Sand in the tea, sand in the ledger, sand in my ears.",
+"Two of the men went home to Qurna. Can't blame them.",
+"My back is forty years older than the rest of me."
+],
+"last_words": [
+"Fine. I'll walk. You'll miss me by Thursday.",
+"Wrong man. You'll see it tomorrow at first light.",
+"Keep the rope tied off at the second peg. Nobody listens, but keep it tied.",
+"Nine tombs, and this is how it ends. Suit yourselves.",
+"Pay my men what's owed them. That's all I ask.",
+"I'd have had them by Friday. Now you won't.",
+"Don't send anyone down that shaft alone. That's not a curse, that's sense.",
+"Goodbye. Watch the quiet ones."
+]
+}
+}
+]
