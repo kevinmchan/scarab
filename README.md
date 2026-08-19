@@ -60,3 +60,22 @@ Reads `scarab.src.html` plus `content/`, writes `index.html` (deployed) and
 man" — characters are dealt to places at random and targets include human players, so
 gendered phrasing misgenders whoever it lands on. Re-run it after regenerating
 `content/personas.json`.
+
+## Putting it on scarab.quest
+
+The site is live at <https://kevinmchan.github.io/scarab/>. To move it to the custom
+domain, buy `scarab.quest`, add these records at the registrar, then run
+`./setup-domain.sh`:
+
+| Type | Name | Value |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | kevinmchan.github.io. |
+
+The script refuses to run until DNS actually points at GitHub, because setting the
+custom domain early redirects the working URL to a domain that isn't answering yet.
+Share links are built from whatever address the page is served on, so they follow the
+domain automatically.
